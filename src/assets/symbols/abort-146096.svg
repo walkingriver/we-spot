@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 137.59969 137.59969" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <g transform="matrix(.90287 0 0 .90287 -321.03 -363.2)">
+  <path id="a" d="m371.57 418.27 120.4 120.4" fill="#f00" fill-rule="evenodd" stroke="#f00" stroke-width="32"/>
+  <use transform="matrix(-1 0 0 1 863.55 0)" width="744.09448" height="1052.3622" fill="#f00" stroke="#f00" xlink:href="#a"/>
+ </g>
+</svg>

@@ -17,9 +17,9 @@
   <h2>Total Cards: {{deck.length}}</h2>
 
   <ion-list>
-    <ion-item *ngFor="let symbol of deck; let cardNumber=index;">
+    <ion-item *ngFor="let card of deck; let cardNumber=index;">
       <ion-label>Card {{cardNumber}}</ion-label>
-      <app-dobble-card [symbols]="symbol"></app-dobble-card>
+      <app-dobble-card [card]="card"></app-dobble-card>
     </ion-item>
   </ion-list>
 

@@ -1,2 +1,7 @@
+<ion-item>
+  <ion-label>{{card.join('|')}}</ion-label>
+  <img *ngFor="let cardSymbol of symbolService.buildCard(card)"
+  src="/assets/symbols/{{cardSymbol.fileName}}"
+  [alt]="cardSymbol.referralUrl">
 
-<ion-label>{{symbols.join('|')}}</ion-label>
+</ion-item>
