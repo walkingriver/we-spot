@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Setup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <label for="symbolCount">Select the number of symbols on each card.</label>
+  <select id="symbolCount"
+    [(ngModel)]="selectedNumberOfSymbols"
+    (ngModelChange)="onSymbolCountChanged()">
+    <option *ngFor="let validSymbol of validSymbols"
+      [value]="validSymbol">{{validSymbol}}</option>
+  </select>
+
+  <h1>All Cards</h1>
+  <h2>Total Cards: {{deck.length}}</h2>
+
+  <ion-list>
+    <ion-item *ngFor="let symbol of deck; let cardNumber=index;">
+      <ion-label>Card {{cardNumber}}</ion-label>
+      <app-dobble-card [symbols]="symbol"></app-dobble-card>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
