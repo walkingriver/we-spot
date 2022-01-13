@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { DobbleService } from '../dobble.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DeckService } from '../deck/deck.service';
 
 @Component({
   selector: 'app-setup',
@@ -7,11 +7,12 @@ import { DobbleService } from '../dobble.service';
   styleUrls: ['./setup.page.scss'],
 })
 export class SetupPage implements OnInit {
-  selectedNumberOfSymbols = 4;
+  selectedNumberOfSymbols = 12;
   validSymbols = [4, 6, 8, 12];
   deck: number[][] = [];
 
-  constructor(private dobble: DobbleService) {
+
+  constructor(private deckService: DeckService) {
   }
 
   ngOnInit() {
@@ -19,6 +20,6 @@ export class SetupPage implements OnInit {
   }
 
   onSymbolCountChanged() {
-    this.deck = this.dobble.dobble(+this.selectedNumberOfSymbols);
+    this.deck = this.deckService.buildDeck(+this.selectedNumberOfSymbols);
   }
 }

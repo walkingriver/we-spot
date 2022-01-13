@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
-import { SYMBOLS  } from './symbols';
+import { SYMBOLS } from './symbols';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SymbolService {
-  shuffledSymbols = this.shuffleSymbols();
+  shuffledSymbols = this.shuffle(SYMBOLS);
 
   constructor() { }
 
-
   buildCard(card: number[]) {
-    return card.map( (cardNumber) => this.shuffledSymbols[cardNumber - 1]);
+    card = card.map((cardNumber) => this.shuffledSymbols[cardNumber - 1]);
+
+    return this.shuffle(card);
   }
 
-  private shuffleSymbols() {
-    return SYMBOLS.sort(() => Math.random() - 0.5);
-  }
 
+  private shuffle(elements: any[]) {
+    return elements.sort(() => Math.random() - 0.5);
+  }
 }

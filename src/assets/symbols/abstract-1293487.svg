@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" viewBox="0 0 97.654 150.78" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <radialGradient id="g" cx="281.96" cy="475" r="26.596" gradientTransform="matrix(1.0933 .038634 -.054783 1.5503 -.28742 -269.16)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#00f1ff" offset="0"/>
+   <stop stop-color="#00bdff" offset=".5"/>
+   <stop stop-color="#06f" offset="1"/>
+  </radialGradient>
+  <radialGradient id="h" cx="307.11" cy="484.58" r="16.703" gradientTransform="matrix(.9854 .22972 -.26941 2.1034 135.04 -605.84)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#d5e5ff" offset="0"/>
+   <stop stop-color="#d5e5ff" stop-opacity="0" offset="1"/>
+  </radialGradient>
+  <filter id="e" x="-.2615" y="-.20458" width="1.523" height="1.4092" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="2.3899464"/>
+  </filter>
+  <filter id="f" x="-.44767" y="-.27438" width="1.8953" height="1.5488" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="1.7720207"/>
+  </filter>
+ </defs>
+ <g transform="translate(-314.03 -291.55)">
+  <g transform="matrix(1.7938 0 0 1.7938 -154.34 -475.17)">
+   <path d="m292.46 427.42c-23.118 19.515-41.497 52.603-22.655 75.977 13.793 12.849 34.584 10.14 42.325-6.4898 14.05-30.748-26.8-39.798-19.669-69.487z" fill="url(#g)"/>
+   <path transform="matrix(1 0 0 .74123 -1.7678 132.62)" d="m289.64 504.76c9.8911-2.8925 12.601-12.313 15.221-21.816 0.27934-8.9169 8.5417-8.2332 6.3419 2.0294-3.3987 11.842-9.4036 20.075-21.562 19.787z" fill="url(#h)" filter="url(#e)"/>
+   <path transform="matrix(-1.6251 -.38171 -.37372 1.591 -43.921 -313.07)" d="m-290.5 426.61c0 4.2802-2.1266 7.75-4.75 7.75s-4.75-3.4698-4.75-7.75 2.1266-7.75 4.75-7.75 4.75 3.4698 4.75 7.75z" fill="#fff" filter="url(#f)" opacity=".88496"/>
+  </g>
+ </g>
+</svg>

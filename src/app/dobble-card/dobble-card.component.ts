@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { SymbolService } from '../symbol.service';
+import { CardSymbol } from '../symbols';
 
 @Component({
   selector: 'app-dobble-card',
@@ -8,10 +9,16 @@ import { SymbolService } from '../symbol.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DobbleCardComponent implements OnInit {
-  @Input() card: number[] = [];
-  constructor(public symbolService: SymbolService) { }
+  @Input() card: CardSymbol[] = [];
+  @Output() symbolClick = new EventEmitter();
+
+  constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSymbolClick(symbol: CardSymbol) {
+    this.symbolClick.emit(symbol);
   }
 
 }

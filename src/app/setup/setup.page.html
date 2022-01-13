@@ -6,7 +6,8 @@
 
 <ion-content>
   <label for="symbolCount">Select the number of symbols on each card.</label>
-  <select id="symbolCount"
+  <select #symbolCount
+    id="symbolCount"
     [(ngModel)]="selectedNumberOfSymbols"
     (ngModelChange)="onSymbolCountChanged()">
     <option *ngFor="let validSymbol of validSymbols"
@@ -17,8 +18,7 @@
   <h2>Total Cards: {{deck.length}}</h2>
 
   <ion-list>
-    <ion-item *ngFor="let card of deck; let cardNumber=index;">
-      <ion-label>Card {{cardNumber}}</ion-label>
+    <ion-item *ngFor="let card of deck">
       <app-dobble-card [card]="card"></app-dobble-card>
     </ion-item>
   </ion-list>
