@@ -6,10 +6,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content padding [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">WeSee</ion-title>
+      <ion-title size="large">We See</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -18,5 +18,10 @@
     <ion-button expand="block"
       [routerLink]="['/setup']"
       routerDirection="root">New Game</ion-button>
+
+    <ion-button expand="block" fill="clear"
+      [routerLink]="['/image-credits']"
+      routerDirection="root">See All Images</ion-button>
+
   </div>
 </ion-content>

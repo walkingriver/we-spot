@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'solitaire',
     loadChildren: () => import('./solitaire/solitaire.module').then( m => m.SolitairePageModule)
   },
+  {
+    path: 'image-credits',
+    loadChildren: () => import('./image-credits/image-credits.module').then( m => m.ImageCreditsPageModule)
+  },
 ];
 
 @NgModule({

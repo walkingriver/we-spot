@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Image Credits</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <h1>Total Images: {{allSymbols?.length}}</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngFor="let symbol of allSymbols">
+        <ion-button size="large"
+          fill="clear"
+          [title]="symbol.fileName">
+          <ion-icon slot="icon-only"
+            src="/assets/symbols/{{symbol.fileName}}"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
