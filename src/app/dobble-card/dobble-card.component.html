@@ -1,10 +1,12 @@
 <ion-item>
   <!-- <ion-label>{{card.join('|')}}</ion-label> -->
-  <ion-img *ngFor="let cardSymbol of card"
-    src="/assets/symbols/{{cardSymbol?.fileName}}"
-    [alt]="cardSymbol?.fileName"
-    [title]="cardSymbol?.fileName"
+  <ion-button *ngFor="let cardSymbol of card"
+  size="large"
+    fill="clear"
     (click)="onSymbolClick(cardSymbol)">
-    <ion-ripple-effect></ion-ripple-effect>
-  </ion-img>
+    <ion-icon slot="icon-only"
+      src="/assets/symbols/{{cardSymbol?.fileName}}"
+      [title]="cardSymbol?.fileName">
+    </ion-icon>
+  </ion-button>
 </ion-item>
