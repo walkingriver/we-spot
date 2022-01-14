@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SetupPageRoutingModule } from './setup-routing.module';
+import { SolitairePageRoutingModule } from './solitaire-routing.module';
 
-import { SetupPage } from './setup.page';
+import { SolitairePage } from './solitaire.page';
 import { DobbleCardComponent } from '../dobble-card/dobble-card.component';
 
 @NgModule({
@@ -14,8 +14,8 @@ import { DobbleCardComponent } from '../dobble-card/dobble-card.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    SetupPageRoutingModule
+    SolitairePageRoutingModule
   ],
-  declarations: [SetupPage]
+  declarations: [SolitairePage, DobbleCardComponent]
 })
-export class SetupPageModule {}
+export class SolitairePageModule { }

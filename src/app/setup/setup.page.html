@@ -1,26 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Setup</ion-title>
+    <ion-title>New Game</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <label for="symbolCount">Select the number of symbols on each card.</label>
-  <select #symbolCount
-    id="symbolCount"
-    [(ngModel)]="selectedNumberOfSymbols"
-    (ngModelChange)="onSymbolCountChanged()">
-    <option *ngFor="let validSymbol of validSymbols"
-      [value]="validSymbol">{{validSymbol}}</option>
-  </select>
-
-  <h1>All Cards</h1>
-  <h2>Total Cards: {{deck.length}}</h2>
-
-  <ion-list>
-    <ion-item *ngFor="let card of deck">
-      <app-dobble-card [card]="card"></app-dobble-card>
-    </ion-item>
-  </ion-list>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Configure a new game
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Select the number of symbols on each card: </ion-label>
+          <ion-select [(ngModel)]="selectedNumberOfSymbols"
+            interface="popover">
+            <ion-select-option *ngFor="let validSymbol of validSymbols"
+              [value]="validSymbol">{{validSymbol}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-button color="primary"
+        [routerLink]="['/solitaire', selectedNumberOfSymbols]"
+        routerDirection="root"
+        expand="block">
+        Start
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

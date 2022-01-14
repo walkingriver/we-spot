@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'setup',
     loadChildren: () => import('./setup/setup.module').then( m => m.SetupPageModule)
   },
+  {
+    path: 'solitaire',
+    loadChildren: () => import('./solitaire/solitaire.module').then( m => m.SolitairePageModule)
+  },
 ];
 
 @NgModule({
