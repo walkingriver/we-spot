@@ -12,6 +12,8 @@ export class SolitairePage implements OnInit {
   deck: CardSymbol[][];
   currentCard: CardSymbol[];
   previousCard: CardSymbol[];
+  score = 0;
+  index = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,4 +26,21 @@ export class SolitairePage implements OnInit {
     this.previousCard = this.deck[0];
   }
 
+  onSymbolClick(symbolClicked: CardSymbol) {
+    console.log(symbolClicked);
+
+    const matchingSymbol = this.previousCard.find(symbol => symbol.fileName === symbolClicked.fileName);
+
+    if (matchingSymbol) {
+      this.score++;
+    }
+
+    this.previousCard = this.currentCard;
+    this.currentCard = this.deck[this.deck.indexOf(this.currentCard) + 1];
+    this.index++;
+
+    if (this.currentCard === undefined) {
+     // Game over!
+    }
+  }
 }

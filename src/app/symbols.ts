@@ -17,7 +17,7 @@ export const SYMBOLS: CardSymbol[] = [
   { fileName: 'abort-146096.svg', referralUrl: '' },
   // { fileName: 'amazing-1295374.svg', referralUrl: '' },
   { fileName: 'anchor-309481.svg', referralUrl: '' },
-  { fileName: 'animal-1294936.svg', referralUrl: '' },
+  // { fileName: 'animal-1294936.svg', referralUrl: '' },
   // { fileName: 'bananas-575773.svg', referralUrl: '' },
   { fileName: 'baseball-157928.svg', referralUrl: '' },
   { fileName: 'bell-pepper-33623.svg', referralUrl: '' },
