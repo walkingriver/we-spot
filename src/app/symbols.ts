@@ -14,7 +14,6 @@ export type Card = CardSymbol[];
  * render properly and should eventually be deleted.
  */
 export const SYMBOLS: CardSymbol[] = [
-
   { fileName: 'abort-146096.svg', referralUrl: '' },
   { fileName: 'abstract-1293487.svg', referralUrl: '' },
   { fileName: 'abstract-1526167.svg', referralUrl: '' },
@@ -53,6 +52,7 @@ export const SYMBOLS: CardSymbol[] = [
   { fileName: 'cherries-158241.svg', referralUrl: '' },
   { fileName: 'christmas-6830681.svg', referralUrl: '' },
   { fileName: 'circle-33085.svg', referralUrl: '' },
+  { fileName: 'clapperboard-1078813.svg', referralUrl: '' },
   { fileName: 'coconut-1293036.svg', referralUrl: '' },
   { fileName: 'coffee-6221625.svg', referralUrl: '' },
   { fileName: 'colorful-1197336.svg', referralUrl: '' },
@@ -63,6 +63,7 @@ export const SYMBOLS: CardSymbol[] = [
   { fileName: 'crystals-155644.svg', referralUrl: '' },
   { fileName: 'dart-board-25780.svg', referralUrl: '' },
   { fileName: 'deer-5596559.svg', referralUrl: '' },
+  { fileName: 'diamond-6922292.svg', referralUrl: '' },
   { fileName: 'diamond-6922292.svg', referralUrl: '' },
   { fileName: 'die-308887.svg', referralUrl: '' },
   { fileName: 'diploma-152024.svg', referralUrl: '' },
@@ -88,6 +89,7 @@ export const SYMBOLS: CardSymbol[] = [
   { fileName: 'halloween-23439.svg', referralUrl: '' },
   { fileName: 'hamburger-31775.svg', referralUrl: '' },
   { fileName: 'hand-sanitizer-5302594.svg', referralUrl: '' },
+  { fileName: 'hands-6030186.svg', referralUrl: '' },
   { fileName: 'hat-157581.svg', referralUrl: '' },
   { fileName: 'hat-159463.svg', referralUrl: '' },
   { fileName: 'hills-1293027.svg', referralUrl: '' },
@@ -110,7 +112,6 @@ export const SYMBOLS: CardSymbol[] = [
   { fileName: 'lcd-32872.svg', referralUrl: '' },
   { fileName: 'lime-25314.svg', referralUrl: '' },
   { fileName: 'location-light.svg', referralUrl: '' },
-  { fileName: 'magnet-24287.svg', referralUrl: '' },
   { fileName: 'mammal-5711107.svg', referralUrl: '' },
   { fileName: 'map-icon-1293037.svg', referralUrl: '' },
   { fileName: 'maple-leaf-38777.svg', referralUrl: '' },
@@ -137,7 +138,6 @@ export const SYMBOLS: CardSymbol[] = [
   { fileName: 'rocket-launch-5776462.svg', referralUrl: '' },
   { fileName: 'russian-5587826.svg', referralUrl: '' },
   { fileName: 'sack-5658984.svg', referralUrl: '' },
-  { fileName: 'safe-575395.svg', referralUrl: '' },
   { fileName: 'sailboats-5762309.svg', referralUrl: '' },
   { fileName: 'salt-3092887.svg', referralUrl: '' },
   { fileName: 'sandwich-311262.svg', referralUrl: '' },
@@ -148,7 +148,6 @@ export const SYMBOLS: CardSymbol[] = [
   { fileName: 'snowman-1106004.svg', referralUrl: '' },
   { fileName: 'sock-4594124.svg', referralUrl: '' },
   { fileName: 'speaker-98507.svg', referralUrl: '' },
-  { fileName: 'spider-web-light.svg', referralUrl: '' },
   { fileName: 'star-1292832.svg', referralUrl: '' },
   { fileName: 'starfish-46584.svg', referralUrl: '' },
   { fileName: 'stop-32577.svg', referralUrl: '' },
@@ -165,6 +164,7 @@ export const SYMBOLS: CardSymbol[] = [
   { fileName: 'tree-576847.svg', referralUrl: '' },
   { fileName: 'umbrella-1032758.svg', referralUrl: '' },
   { fileName: 'united-nations-311419.svg', referralUrl: '' },
+  { fileName: 'van-2492912.svg', referralUrl: '' },
   { fileName: 'vitamins-26622.svg', referralUrl: '' },
   { fileName: 'warning-838655.svg', referralUrl: '' },
   { fileName: 'watch-5905171.svg', referralUrl: '' },
@@ -173,5 +173,5 @@ export const SYMBOLS: CardSymbol[] = [
   { fileName: 'wind-rose-6294453.svg', referralUrl: '' },
   { fileName: 'wipe-97583.svg', referralUrl: '' },
   { fileName: 'world-153534.svg', referralUrl: '' },
-  { fileName: 'yin-2730344.svg', referralUrl: '' },
-  ];
+  { fileName: 'yin-2730344.svg', referralUrl: '' }
+];

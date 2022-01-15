@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+ion-icon, ion-button {
+  &.big {
+    font-size: 50px;
+    width: 50px;
+    height: 50px;
+  }
+
+  &.bigger {
+    font-size: 100px;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/*
+ion-item {
+  position: relative;
+}
+
+ion-img, img {
+  width: 10%;
+  object-fit: contain;
+} */

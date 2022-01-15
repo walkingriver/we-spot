@@ -9,13 +9,16 @@
     <ion-row>
       <ion-col size="12">
         <h1>Total Images: {{allSymbols?.length}}</h1>
+        <p>All images used in this game are used with permission from Pixabay.com</p>
+        <p>Clicking on any image will take you to its page so you can download it and view other images by the same artists.</p>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col *ngFor="let symbol of allSymbols">
         <ion-button size="large"
           fill="clear"
-          [title]="symbol.fileName">
+          (click)="openImageCredits(symbol)"
+          [title]="symbol.referralUrl">
           <ion-icon slot="icon-only"
             src="/assets/symbols/{{symbol.fileName}}"></ion-icon>
         </ion-button>
