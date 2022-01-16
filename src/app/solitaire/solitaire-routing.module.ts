@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: ':symbolsPerCard',
     component: SolitairePage
+  },
+  {
+    path: ':symbolsPerCard/:slug',
+    component: SolitairePage
   }
 ];
 

@@ -21,7 +21,9 @@ export class SolitairePage implements OnInit {
 
   ngOnInit() {
     const symbolsPerCard = +this.route.snapshot.paramMap.get('symbolsPerCard');
-    this.deck = this.deckService.buildDeck(symbolsPerCard);
+    const slug = this.route.snapshot.paramMap.get('slug') || '';
+
+    this.deck = this.deckService.buildDeck(symbolsPerCard, slug);
     this.currentCard = this.deck[1];
     this.previousCard = this.deck[0];
   }

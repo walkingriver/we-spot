@@ -1,25 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DeckService } from '../deck/deck.service';
+import { Component, OnInit } from '@angular/core';
+import { generateSlug } from 'random-word-slugs';
 
 @Component({
   selector: 'app-setup',
   templateUrl: './setup.page.html',
   styleUrls: ['./setup.page.scss'],
 })
-export class SetupPage implements OnInit {
+export class SetupPage {
   selectedNumberOfSymbols = 12;
   validSymbols = [4, 6, 8, 12];
   deck: number[][] = [];
-
-
-  constructor(private deckService: DeckService) {
-  }
-
-  ngOnInit() {
-    this.onSymbolCountChanged();
-  }
-
-  onSymbolCountChanged() {
-    this.deck = this.deckService.buildDeck(+this.selectedNumberOfSymbols);
-  }
+  slug = generateSlug();
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { SymbolService } from '../symbol.service';
 import { CardSymbol } from '../symbols';
 
 @Component({

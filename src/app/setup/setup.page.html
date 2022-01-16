@@ -7,14 +7,18 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>
+      <ion-card-subtitle>
         Configure a new game
-      </ion-card-title>
+      </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item>
-          <ion-label>Select the number of symbols on each card: </ion-label>
+          <ion-label position="stacked">Game Name:</ion-label>
+          <ion-input [(ngModel)]="slug"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Number of symbols per card: </ion-label>
           <ion-select [(ngModel)]="selectedNumberOfSymbols"
             interface="popover">
             <ion-select-option *ngFor="let validSymbol of validSymbols"
@@ -23,7 +27,7 @@
         </ion-item>
       </ion-list>
       <ion-button color="primary"
-        [routerLink]="['/solitaire', selectedNumberOfSymbols]"
+        [routerLink]="['/solitaire', selectedNumberOfSymbols, slug]"
         routerDirection="root"
         expand="block">
         Start

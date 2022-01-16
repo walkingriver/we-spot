@@ -1,31 +1,38 @@
 import { Injectable } from '@angular/core';
 import { DobbleService } from '../dobble.service';
-import { SymbolService } from '../symbol.service';
+import { ShuffleService } from '../shuffle.service';
+import { CardSymbol, SYMBOLS } from '../symbols';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeckService {
+  shuffledSymbols: CardSymbol[];
+
   constructor(
-    private symbolService: SymbolService,
-    private dobbleService: DobbleService
-  ) { }
+    private dobbleService: DobbleService,
+    private shuffleService: ShuffleService) { }
 
   /**
    * Builds a deck of cards
    *
    * @param numberOfCards number of cards in the deck
    */
-  buildDeck(numberOfCards: number) {
+  buildDeck(numberOfCards: number, slug = '') {
+    this.shuffleService.seed(slug);
+    this.shuffledSymbols = this.shuffleService.shuffle(SYMBOLS);
+
     const rawCards = this.dobbleService.dobble(numberOfCards);
 
     const deck = rawCards.map(card =>
-      this.symbolService.buildCard(card));
+      this.buildCard(card));
 
-    return this.shuffle(deck);
+    return this.shuffleService.shuffle(deck);
   }
 
-  private shuffle(elements: any[]) {
-    return elements.sort(() => Math.random() - 0.5);
+  buildCard(symbols: number[]) {
+    const card = symbols.map((cardNumber) => this.shuffledSymbols[cardNumber - 1]);
+
+    return this.shuffleService.shuffle(card);
   }
 }
