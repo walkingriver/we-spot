@@ -1,0 +1,21 @@
+.solitaire__grid {
+    // Force main grid height to 100% of the screen
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.solitaire__card-row {
+    // Force Card row to fill remaining height on screen
+    flex: 1 1 auto;
+}
+
+.solitaire__card-container {
+    display: flex;
+    flex-direction: column;
+}
+
+app-dobble-card {
+    // Force each card to take up 50% of the screen (row)
+    flex: 0 0 50%;
+}
