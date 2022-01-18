@@ -1,13 +1,16 @@
-<ion-grid fixed>
-  <ion-row>
-    <ion-col *ngFor="let cardSymbol of card">
-      <ion-icon
-        class="bigger"
-        (click)="onSymbolClick(cardSymbol)"
-        src="/assets/symbols/{{cardSymbol?.fileName}}"
-        [title]="cardSymbol?.fileName">
-        
-      </ion-icon>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+<ion-card class="symbols symbols-{{card.length}}">
+  <ion-card-header color="dark">
+    <ion-card-subtitle>{{title}}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col *ngFor="let cardSymbol of card">
+        <ion-icon class="bigger"
+          (click)="onSymbolClick(cardSymbol)"
+          src="/assets/symbols/{{cardSymbol?.fileName}}"
+          [title]="cardSymbol?.fileName">
+        </ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

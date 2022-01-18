@@ -9,6 +9,7 @@ import { CardSymbol } from '../symbols';
 })
 export class DobbleCardComponent implements OnInit {
   @Input() card: CardSymbol[] = [];
+  @Input() title = 'Card';
   @Output() symbolClick = new EventEmitter();
 
   constructor() { }

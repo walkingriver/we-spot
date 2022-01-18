@@ -1,27 +1,39 @@
-:host {
-  display: block;
+// :host {
+//   display: block;
+// }
+
+// .symbols-12 {
+//   ion-icon {
+//     &.bigger {
+//       width: calc(100vw / 8);
+//       height: calc(100vw / 8);
+//     }
+//   }
+// }
+// .symbols-8 {
+//   ion-icon {
+//     &.bigger {
+//       width: calc(100vw / 8);
+//       height: calc(100vw / 8);
+//     }
+//   }
+// }
+// .symbols-6 {
+//   ion-icon {
+//     &.bigger {
+//       width: calc(100vw / 8);
+//       height: calc(100vw / 8);
+//     }
+//   }
+// }
+// .symbols-4 {
+//   ion-icon {
+//     &.bigger {
+//       width: calc(100vw / 3);
+//       height: calc(100vw / 3);
+//     }
+//   }
+// }
+ion-icon {
+  font-size: calc((.4em + 3vmin) + (.4em + 3vmax));
 }
-
-ion-icon, ion-button {
-  &.big {
-    font-size: 50px;
-    width: 50px;
-    height: 50px;
-  }
-
-  &.bigger {
-    font-size: 100px;
-    width: 100px;
-    height: 100px;
-  }
-}
-
-/*
-ion-item {
-  position: relative;
-}
-
-ion-img, img {
-  width: 10%;
-  object-fit: contain;
-} */
