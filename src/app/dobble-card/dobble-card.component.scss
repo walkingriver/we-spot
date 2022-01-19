@@ -1,39 +1,5 @@
-// :host {
-//   display: block;
-// }
 
-// .symbols-12 {
-//   ion-icon {
-//     &.bigger {
-//       width: calc(100vw / 8);
-//       height: calc(100vw / 8);
-//     }
-//   }
-// }
-// .symbols-8 {
-//   ion-icon {
-//     &.bigger {
-//       width: calc(100vw / 8);
-//       height: calc(100vw / 8);
-//     }
-//   }
-// }
-// .symbols-6 {
-//   ion-icon {
-//     &.bigger {
-//       width: calc(100vw / 8);
-//       height: calc(100vw / 8);
-//     }
-//   }
-// }
-// .symbols-4 {
-//   ion-icon {
-//     &.bigger {
-//       width: calc(100vw / 3);
-//       height: calc(100vw / 3);
-//     }
-//   }
-// }
 ion-icon {
   font-size: calc((.4em + 3vmin) + (.4em + 3vmax));
+  // font-size: 2.5rem;
 }
