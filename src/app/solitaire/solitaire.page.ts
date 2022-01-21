@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DeckService } from '../deck/deck.service';
 import { CardSymbol } from '../symbols';
 
@@ -14,16 +14,20 @@ export class SolitairePage implements OnInit {
   previousCard: CardSymbol[];
   score = 0;
   index = 1;
+  startTime = new Date();
+  symbolsPerCard: number;
+  slug: string;
+  gameOver = false;
 
   constructor(
     private route: ActivatedRoute,
     private deckService: DeckService) { }
 
   ngOnInit() {
-    const symbolsPerCard = +this.route.snapshot.paramMap.get('symbolsPerCard');
-    const slug = this.route.snapshot.paramMap.get('slug') || '';
+    this.symbolsPerCard = +this.route.snapshot.paramMap.get('symbolsPerCard');
+    this.slug = this.route.snapshot.paramMap.get('slug') || '';
 
-    this.deck = this.deckService.buildDeck(symbolsPerCard, slug);
+    this.deck = this.deckService.buildDeck(this.symbolsPerCard, this.slug);
     this.currentCard = this.deck[1];
     this.previousCard = this.deck[0];
   }
@@ -34,15 +38,38 @@ export class SolitairePage implements OnInit {
     const matchingSymbol = this.previousCard.find(symbol => symbol.fileName === symbolClicked.fileName);
 
     if (matchingSymbol) {
-      this.score++;
+      this.score += this.calculateScore(this.startTime, this.symbolsPerCard);
     }
 
     this.previousCard = this.currentCard;
-    this.currentCard = this.deck[this.deck.indexOf(this.currentCard) + 1];
-    this.index++;
 
-    if (this.currentCard === undefined) {
-     // Game over!
+    if (this.index >= this.deck.length - 1) {
+      this.currentCard = null;
+      this.setGameOver();
+    } else {
+      this.currentCard = this.deck[this.deck.indexOf(this.currentCard) + 1];
+      this.index++;
+      this.startTime = new Date();
     }
+  }
+
+  setGameOver() {
+    this.gameOver = true;
+    console.log('Game over, score: ' + this.score);
+    console.log(`Game over, game URL: /${this.symbolsPerCard}/${this.slug}`);
+  }
+
+  /**
+   * Determines the score based on elapsed time on this card.
+   * The score for the card is the number of seconds equal to
+   * the number of symbols on the card, less the elapsed time in
+   * milliseconds.
+   * Minimum score for a correct answer is 50.
+   */
+  calculateScore(startTime, symbolsPerCard) {
+    const timeElapsed = new Date().getTime() - startTime.getTime();
+    const score = Math.max(50, 1000 * symbolsPerCard - timeElapsed);
+
+    return score;
   }
 }
