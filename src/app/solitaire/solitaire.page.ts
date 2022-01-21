@@ -17,6 +17,7 @@ export class SolitairePage implements OnInit {
   startTime = new Date();
   symbolsPerCard: number;
   slug: string;
+  gameOver = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,7 +45,7 @@ export class SolitairePage implements OnInit {
 
     if (this.index >= this.deck.length - 1) {
       this.currentCard = null;
-      this.gameOver();
+      this.setGameOver();
     } else {
       this.currentCard = this.deck[this.deck.indexOf(this.currentCard) + 1];
       this.index++;
@@ -52,7 +53,8 @@ export class SolitairePage implements OnInit {
     }
   }
 
-  gameOver() {
+  setGameOver() {
+    this.gameOver = true;
     console.log('Game over, score: ' + this.score);
     console.log(`Game over, game URL: /${this.symbolsPerCard}/${this.slug}`);
   }
