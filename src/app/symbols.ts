@@ -64,7 +64,7 @@ export const SYMBOLS: CardSymbol[] = [
   { fileName: 'dart-board-25780.svg', referralUrl: '' },
   { fileName: 'deer-5596559.svg', referralUrl: '' },
   { fileName: 'diamond-6922292.svg', referralUrl: '' },
-  { fileName: 'diamond-6922292.svg', referralUrl: '' },
+  { fileName: 'traffic-light-24177.svg', referralUrl: '' },
   { fileName: 'die-308887.svg', referralUrl: '' },
   { fileName: 'diploma-152024.svg', referralUrl: '' },
   { fileName: 'doctor-1295581.svg', referralUrl: '' },
