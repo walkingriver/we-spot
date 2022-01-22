@@ -1,6 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Image Credits</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/setup']">
+        <ion-icon slot="icon-only"
+          name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -9,13 +15,15 @@
     <ion-row>
       <ion-col size="12">
         <h1>Total Images: {{allSymbols?.length}}</h1>
-        <p>All images in this game are used with permission from <a href="https://pixabay.com" target="_blank">Pixabay.com</a>.</p>
-        <p>Clicking on any image will take you to its page so you can download it and view other images by the same artists.</p>
+        <p>All images in this game are used with permission from <a href="https://pixabay.com"
+            target="_blank">Pixabay.com</a>.</p>
+        <p>Clicking on any image will take you to its page so you can download it and view other images by the same
+          artists.</p>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col *ngFor="let symbol of allSymbols">
-        <ion-button size="large"
+        <ion-button class="credit-image"
           fill="clear"
           (click)="openImageCredits(symbol)"
           [title]="symbol.referralUrl">

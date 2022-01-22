@@ -1,0 +1,13 @@
+ion-icon {
+  background-color: transparent;
+  font-size: calc((.4em + 5vmin) + (.4em + 5vmax));
+}
+
+ion-content {
+  --ion-background-color: #f4f4f4;
+}
+
+ion-button.credit-image {
+  width: calc((.4em + 6vmin) + (.4em + 6vmax));
+  height: calc((.4em + 6vmin) + (.4em + 6vmax));
+}
