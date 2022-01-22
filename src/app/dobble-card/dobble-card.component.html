@@ -6,6 +6,7 @@
     <ion-row>
       <ion-col *ngFor="let cardSymbol of card">
         <ion-icon class="bigger"
+          appRandomRotation
           (click)="onSymbolClick(cardSymbol)"
           src="/assets/symbols/{{cardSymbol?.fileName}}"
           [title]="cardSymbol?.fileName">

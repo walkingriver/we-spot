@@ -7,15 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { SolitairePageRoutingModule } from './solitaire-routing.module';
 
 import { SolitairePage } from './solitaire.page';
-import { DobbleCardComponent } from '../dobble-card/dobble-card.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     SolitairePageRoutingModule
   ],
-  declarations: [SolitairePage, DobbleCardComponent]
+  declarations: [SolitairePage]
 })
 export class SolitairePageModule { }
