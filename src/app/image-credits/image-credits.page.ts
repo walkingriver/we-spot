@@ -9,7 +9,9 @@ const pixabayUrl = 'https://pixabay.com/vectors/';
   styleUrls: ['./image-credits.page.scss'],
 })
 export class ImageCreditsPage {
-  allSymbols: CardSymbol[] = SYMBOLS.map(symbol => ({
+  allSymbols: CardSymbol[] = SYMBOLS
+  .sort((a, b) => a.fileName.localeCompare(b.fileName))
+  .map(symbol => ({
     fileName: symbol.fileName,
     referralUrl: `${pixabayUrl}${(symbol.fileName).replace('.svg', '')}`,
   }));

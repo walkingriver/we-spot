@@ -1,13 +1,12 @@
-ion-icon {
-  background-color: transparent;
-  font-size: calc((.4em + 5vmin) + (.4em + 5vmax));
-}
-
 ion-content {
-  --ion-background-color: #f4f4f4;
-}
+  --ion-background-color: #c5bebe;
 
-ion-button.credit-image {
-  width: calc((.4em + 6vmin) + (.4em + 6vmax));
-  height: calc((.4em + 6vmin) + (.4em + 6vmax));
+  ion-icon {
+    background-color: transparent;
+    font-size: calc((0.4em + 5vmin) + (0.4em + 5vmax));
+  }
+  ion-button.credit-image {
+    width: calc((0.4em + 6vmin) + (0.4em + 6vmax));
+    height: calc((0.4em + 6vmin) + (0.4em + 6vmax));
+  }
 }

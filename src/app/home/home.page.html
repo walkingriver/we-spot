@@ -3,10 +3,17 @@
     <ion-title>
       Blank
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/image-credits']">
+        <ion-icon slot="icon-only"
+          name="newspaper"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding [fullscreen]="true">
+<ion-content padding
+  [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">We See</ion-title>
@@ -19,7 +26,8 @@
       [routerLink]="['/setup']"
       routerDirection="root">New Game</ion-button>
 
-    <ion-button expand="block" fill="clear"
+    <ion-button expand="block"
+      fill="clear"
       [routerLink]="['/image-credits']"
       routerDirection="root">See All Images</ion-button>
 
