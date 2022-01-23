@@ -18,7 +18,7 @@
         sizeXl="6"
         sizeSm="6"
         sizeXs="12">
-        <app-dobble-card title="Card {{index}}"
+        <app-dobble-card title="Look at this card ({{index}})"
           *ngIf="previousCard"
           [card]="previousCard"></app-dobble-card>
       </ion-col>
@@ -29,7 +29,7 @@
         sizeXs="12">
         <app-dobble-card (symbolClick)="onSymbolClick($event)"
           *ngIf="currentCard"
-          title="Your card - Find a matching symbol"
+          title="Select the ONE matching symbol on this card"
           [card]="currentCard"></app-dobble-card>
       </ion-col>
     </ion-row>
