@@ -1,5 +1,13 @@
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    background-repeat: repeat;
+    --background: url("/assets/images/wallpaper-313301_640.jpg");
+  }
+}
 
-ion-content {
-  background-repeat: repeat;
-  --background: url("/assets/images/background-1879623_640.jpg");
+@media (prefers-color-scheme: light) {
+  ion-content {
+    background-repeat: repeat;
+    --background: url("/assets/images/background-1879623_640.jpg");
+  }
 }
