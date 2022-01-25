@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { DeckService } from '../deck/deck.service';
 import { CardSymbol } from '../symbols';
 
@@ -22,6 +23,7 @@ export class SolitairePage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private toastCtrl: ToastController,
     private deckService: DeckService) { }
 
   ngOnInit() {
@@ -77,6 +79,12 @@ export class SolitairePage implements OnInit {
     const timeElapsed = new Date().getTime() - this.startTime.getTime();
     const maxScore = 1000 * this.symbolsPerCard - 500 * this.incorrectSelections - timeElapsed;
     const score = Math.max(50, maxScore);
+
+    this.toastCtrl.create({
+      message: 'Card Score: ' + score,
+      position: 'top',
+      duration: 2500
+    }).then(toast => toast.present());
 
     return score;
   }
