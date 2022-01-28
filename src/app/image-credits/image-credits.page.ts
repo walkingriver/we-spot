@@ -9,12 +9,18 @@ const pixabayUrl = 'https://pixabay.com/vectors/';
   styleUrls: ['./image-credits.page.scss'],
 })
 export class ImageCreditsPage {
-  allSymbols: CardSymbol[] = SYMBOLS
-  .sort((a, b) => a.fileName.localeCompare(b.fileName))
-  .map(symbol => ({
-    fileName: symbol.fileName,
-    referralUrl: `${pixabayUrl}${(symbol.fileName).replace('.svg', '')}`,
-  }));
+  allSymbols: CardSymbol[] = [];
+
+  constructor() {
+    this.allSymbols = SYMBOLS
+      .sort((a, b) => a.fileName.localeCompare(b.fileName))
+      .map(symbol => ({
+        fileName: symbol.fileName,
+        referralUrl: `${pixabayUrl}${(symbol.fileName).replace('.svg', '')}`,
+      }));
+
+    console.table(this.allSymbols);
+  }
 
   openImageCredits(symbol) {
     window.open(symbol.referralUrl, '_blank');
