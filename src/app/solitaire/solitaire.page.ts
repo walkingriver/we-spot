@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { DeckService } from '../deck/deck.service';
 import { CardSymbol } from '../symbols';
 
@@ -18,9 +19,11 @@ export class SolitairePage implements OnInit {
   symbolsPerCard: number;
   slug: string;
   gameOver = false;
+  incorrectSelections = 0;
 
   constructor(
     private route: ActivatedRoute,
+    private toastCtrl: ToastController,
     private deckService: DeckService) { }
 
   ngOnInit() {
@@ -38,9 +41,14 @@ export class SolitairePage implements OnInit {
     const matchingSymbol = this.previousCard.find(symbol => symbol.fileName === symbolClicked.fileName);
 
     if (matchingSymbol) {
-      this.score += this.calculateScore(this.startTime, this.symbolsPerCard);
+      this.score += this.calculateScore();
+      this.advanceCard();
+    } else {
+      this.incorrectSelections++;
     }
+  }
 
+  advanceCard() {
     this.previousCard = this.currentCard;
 
     if (this.index >= this.deck.length - 1) {
@@ -64,11 +72,19 @@ export class SolitairePage implements OnInit {
    * The score for the card is the number of seconds equal to
    * the number of symbols on the card, less the elapsed time in
    * milliseconds.
-   * Minimum score for a correct answer is 50.
+   *
+   * Minimum score for a card is 50.
    */
-  calculateScore(startTime, symbolsPerCard) {
-    const timeElapsed = new Date().getTime() - startTime.getTime();
-    const score = Math.max(50, 1000 * symbolsPerCard - timeElapsed);
+  calculateScore() {
+    const timeElapsed = new Date().getTime() - this.startTime.getTime();
+    const maxScore = 1000 * this.symbolsPerCard - 500 * this.incorrectSelections - timeElapsed;
+    const score = Math.max(50, maxScore);
+
+    this.toastCtrl.create({
+      message: 'Card Score: ' + score,
+      position: 'top',
+      duration: 2500
+    }).then(toast => toast.present());
 
     return score;
   }
