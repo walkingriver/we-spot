@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { DeckService } from '../deck/deck.service';
+import { SoundService } from '../sound.service';
 import { CardSymbol } from '../symbols';
 
 @Component({
@@ -24,7 +25,8 @@ export class SolitairePage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private toastCtrl: ToastController,
-    private deckService: DeckService) { }
+    private deckService: DeckService,
+    private sounds: SoundService) { }
 
   ngOnInit() {
     this.symbolsPerCard = +this.route.snapshot.paramMap.get('symbolsPerCard');
@@ -33,6 +35,8 @@ export class SolitairePage implements OnInit {
     this.deck = this.deckService.buildDeck(this.symbolsPerCard, this.slug);
     this.currentCard = this.deck[1];
     this.previousCard = this.deck[0];
+
+    this.sounds.play('start');
   }
 
   onSymbolClick(symbolClicked: CardSymbol) {
@@ -41,9 +45,11 @@ export class SolitairePage implements OnInit {
     const matchingSymbol = this.previousCard.find(symbol => symbol.fileName === symbolClicked.fileName);
 
     if (matchingSymbol) {
+      this.sounds.playSuccessSound();
       this.score += this.calculateScore();
       this.advanceCard();
     } else {
+      this.sounds.playFailureSound();
       this.incorrectSelections++;
     }
   }
@@ -63,6 +69,7 @@ export class SolitairePage implements OnInit {
 
   setGameOver() {
     this.gameOver = true;
+    this.sounds.play('game-over');
     console.log('Game over, score: ' + this.score);
     console.log(`Game over, game URL: /${this.symbolsPerCard}/${this.slug}`);
   }
