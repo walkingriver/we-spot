@@ -33,17 +33,19 @@ export class SoundService {
     }));
   }
 
-  async play(name: GameSoundName): Promise<void> {
+  play(name: GameSoundName): Promise<void> {
     const sound = this.sounds.find(s => s.name === name);
     if (sound) {
-      await sound.audio.play();
+      return sound.audio.play();
     }
+
+    return Promise.resolve();
   }
 
-  async playRandom(soundNames: string[]): Promise<void> {
+  playRandom(soundNames: string[]): Promise<void> {
     const soundName = soundNames[Math.floor(Math.random() * soundNames.length)];
     const sound = this.sounds.find(s => s.name === soundName);
-    await sound?.audio?.play();
+    return sound?.audio?.play();
   }
 
   playFailureSound() {
