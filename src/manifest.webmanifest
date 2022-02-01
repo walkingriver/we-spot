@@ -1,0 +1,21 @@
+{
+  "name": "We Spot",
+  "short_name": "We Spot",
+  "theme_color": "#ffb380",
+  "background_color": "#ffb380",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "assets/icon/manifest-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon/manifest-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
