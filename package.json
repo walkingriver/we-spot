@@ -10,9 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "icons": "pwa-asset-generator src/assets/symbols/eyes-155625.svg ./src/assets/icon -c -f -o false --maskable false --type png -m src/manifest.webmanifest -i src/index.html",
-    "splash:light": "pwa-asset-generator src/assets/symbols/eyes-155625.svg ./src/assets/icon -h -f -o false --maskable false --type png -m src/manifest.webmanifest -i src/index.html",
-    "splash:dark": "pwa-asset-generator src/assets/symbols/eyes-155625.svg ./src/assets/icon -h -f -d -o false --maskable false --type png -m src/manifest.webmanifest -i src/index.html"
+    "icons": "pwa-asset-generator src/assets/symbols/eyes-155625.svg ./src/assets/icon -e -c -f -t png -m src/manifest.webmanifest -i src/index.html -b ffb380",
+    "splash": "pwa-asset-generator src/assets/symbols/eyes-155625.svg ./src/assets/splash -h -f -t png -m src/manifest.webmanifest -i src/index.html -b #ffb380"
   },
   "private": true,
   "dependencies": {
