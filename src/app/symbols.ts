@@ -62,6 +62,7 @@ export const SYMBOLS: CardSymbol[] = [
   { fileName: 'dove-41260.svg', referralUrl: '' },
   { fileName: 'dragon-1526802.svg', referralUrl: '' },
   { fileName: 'easter-6051942.svg', referralUrl: '' },
+  { fileName: 'eyes-155625.svg', referralUrl: '' },
   { fileName: 'fingerprint-150159.svg', referralUrl: '' },
   { fileName: 'fir-tree-1096466.svg', referralUrl: '' },
   { fileName: 'fire-6886617.svg', referralUrl: '' },

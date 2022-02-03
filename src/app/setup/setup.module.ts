@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { SetupPageRoutingModule } from './setup-routing.module';
 
 import { SetupPage } from './setup.page';
-import { DobbleCardComponent } from '../dobble-card/dobble-card.component';
 
 @NgModule({
   imports: [

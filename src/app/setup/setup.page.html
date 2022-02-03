@@ -2,9 +2,9 @@
   <ion-toolbar>
     <ion-title>New Game</ion-title>
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/image-credits']">
-        <ion-icon slot="icon-only"
-          name="newspaper"></ion-icon>
+      <ion-button [routerLink]="['/home']" routerDirection="back">
+        <ion-icon slot="icon-only" color="dark"
+          name="home"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -12,13 +12,13 @@
 
 <ion-content>
   <ion-card>
-    <ion-card-header>
+    <ion-card-header color="secondary">
       <ion-card-subtitle>
         Configure a new game
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-list>
+      <ion-list lines="none">
         <ion-item>
           <ion-label position="stacked">Game Name:</ion-label>
           <ion-input [(ngModel)]="slug"></ion-input>
@@ -28,13 +28,13 @@
           <ion-select [(ngModel)]="selectedNumberOfSymbols"
             interface="popover">
             <ion-select-option *ngFor="let validSymbol of validSymbols"
-              [value]="validSymbol">{{validSymbol}}</ion-select-option>
+              [value]="validSymbol.value">{{validSymbol.label}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>
       <ion-button color="primary"
         [routerLink]="['/solitaire', selectedNumberOfSymbols, slug]"
-        routerDirection="root"
+        routerDirection="forward"
         expand="block">
         Start
       </ion-button>
