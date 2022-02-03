@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg version="1.1" viewBox="0 0 428.6 428.6" xmlns="http://www.w3.org/2000/svg">
  <g transform="translate(-78.709 -62.71)">
-  <rect x="82.709" y="66.71" width="420.6" height="420.6" fill="#ffb380" stroke="#ffb380" stroke-linecap="round" stroke-width="8"/>
+  <rect x="82.709" y="66.71" width="420.6" height="420.6" fill="#7b219f" stroke="#7b219f" stroke-linecap="round" stroke-width="8"/>
   <g transform="matrix(1 0 0 .88181 16.438 34.661)">
    <path d="m280 250.93c0 78.109-31.98 141.43-71.429 141.43-39.449 0-71.429-63.32-71.429-141.43 0-78.109 31.98-141.43 71.429-141.43 39.449 0 71.429 63.32 71.429 141.43z" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width="8.5193"/>
    <path transform="translate(136)" d="m280 250.93c0 78.109-31.98 141.43-71.429 141.43-39.449 0-71.429-63.32-71.429-141.43 0-78.109 31.98-141.43 71.429-141.43 39.449 0 71.429 63.32 71.429 141.43z" fill="#fff" stroke="#000" stroke-linecap="round" stroke-width="8.5193"/>

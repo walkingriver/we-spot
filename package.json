@@ -1,5 +1,5 @@
 {
-  "name": "WeSpot",
+  "name": "SpyDuh",
   "version": "0.0.1",
   "author": "Michael D. Callaghan",
   "homepage": "https://walkingriver.com/",
@@ -10,8 +10,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "icons": "pwa-asset-generator src/assets/symbols/eyes-155625.svg ./src/assets/icon -e -c -f -t png -m src/manifest.webmanifest -i src/index.html -o false -b '#ffb380'",
-    "splash": "pwa-asset-generator src/assets/symbols/eyes-155625.svg ./src/assets/splash -h -f -t png -m src/manifest.webmanifest -i src/index.html -o false -b '#ffb380'"
+    "icons": "pwa-asset-generator src/assets/symbols/eyes-155625.svg ./src/assets/icon -e -c -f -t png -m src/manifest.webmanifest -i src/index.html -o false -b '#7b219f'",
+    "splash": "pwa-asset-generator src/assets/symbols/eyes-155625.svg ./src/assets/splash -h -f -t png -m src/manifest.webmanifest -i src/index.html -o false -b '#7b219f'",
+    "resources": "npm run icons && npm run splash"
   },
   "private": true,
   "dependencies": {
