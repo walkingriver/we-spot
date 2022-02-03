@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
       SpyDuh!
@@ -6,30 +6,45 @@
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/image-credits']">
         <ion-icon slot="icon-only"
-          name="newspaper"></ion-icon>
+          color="dark"
+          name="images"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding
-  [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">We See</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content class="ion-padding-horizontal">
   <div id="container">
-    <strong>Ready to start a new game?</strong>
-    <ion-button expand="block"
-      [routerLink]="['/setup']"
-      routerDirection="root">New Game</ion-button>
-
-    <ion-button expand="block"
-      fill="clear"
-      [routerLink]="['/image-credits']"
-      routerDirection="root">See All Images</ion-button>
+    <h1>How to Play</h1>
+    <p>
+      SpyDuh! is a game where you try to match symbols between cards.
+      The symbols are randomly placed and rotated on the cards, and then
+      the deck is shuffled.
+    </p>
+    <app-dobble-card title="Sample Card 1"
+      *ngIf="previousCard"
+      [card]="previousCard"></app-dobble-card>
+    <p>
+      The symbols and cards are designed so that any two cards will
+      contain one, and only one, common symbol. The trick is to
+      find that match as quickly as possible. It's not as easy as it sounds.
+    </p>
+    <app-dobble-card title="Sample Card 2"
+      *ngIf="currentCard"
+      [card]="currentCard"></app-dobble-card>
+    <p>
+      The number of cards in each deck is mathematically related to the number
+      of symbols on each card. The more symbols, the more cards, and the harder
+      it is to find the match.
+    </p>
 
   </div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block"
+      [routerLink]="['/setup']"
+      routerDirection="forward">New Game</ion-button>
+  </ion-toolbar>
+</ion-footer>

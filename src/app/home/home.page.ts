@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DeckService } from '../deck/deck.service';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  deck;
+  currentCard;
+  previousCard;
 
-  constructor() {}
+  constructor(private deckService: DeckService,
+  ) {
+    this.deck = this.deckService.buildDeck(4);
+    this.currentCard = this.deck[1];
+    this.previousCard = this.deck[0];
+  }
 
 }
