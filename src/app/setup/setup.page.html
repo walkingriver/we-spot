@@ -2,8 +2,10 @@
   <ion-toolbar>
     <ion-title>New Game</ion-title>
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/home']" routerDirection="back">
-        <ion-icon slot="icon-only" color="dark"
+      <ion-button [routerLink]="['/home']"
+        routerDirection="back">
+        <ion-icon slot="icon-only"
+          color="dark"
           name="home"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -22,6 +24,12 @@
         <ion-item>
           <ion-label position="stacked">Game Name:</ion-label>
           <ion-input [(ngModel)]="slug"></ion-input>
+          <ion-button slot="end"
+            (click)="generateSlug()"
+            color="transparent">
+            <ion-icon name="refresh"
+              slot="icon-only"></ion-icon>
+          </ion-button>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Number of symbols per card: </ion-label>
