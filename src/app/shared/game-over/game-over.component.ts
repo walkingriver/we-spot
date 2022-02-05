@@ -24,8 +24,8 @@ export class GameOverComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.shareText = `I scored ${this.score} points in SpyDuh (${this.game}
-    with ${this.symbols} symbols per card). Try to beat my score at `;
+    this.shareText = `I scored ${this.score} points in SpyDuh (${this.game} ` +
+    `with ${this.symbols} symbols per card). Try to beat my score at `;
   }
 
 }
