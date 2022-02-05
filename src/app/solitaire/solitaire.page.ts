@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { IonRouterOutlet, ToastController } from '@ionic/angular';
 import { DeckService } from '../deck/deck.service';
 import { SoundService } from '../sound.service';
 import { CardSymbol } from '../symbols';
@@ -20,6 +20,7 @@ export class SolitairePage implements OnInit {
   symbolsPerCard: number;
   slug: string;
   gameOver = false;
+  showGameOver = false;
   incorrectSelections = 0;
 
   constructor(
@@ -33,6 +34,11 @@ export class SolitairePage implements OnInit {
     this.slug = this.route.snapshot.paramMap.get('slug') || '';
 
     this.deck = this.deckService.buildDeck(this.symbolsPerCard, this.slug);
+
+    // Uncomment this line when debugging to get to the
+    // end of the deck quickly without playing the whole game.
+    // this.index = this.deck.length - 2;
+
     this.currentCard = this.deck[1];
     this.previousCard = this.deck[0];
 
@@ -61,6 +67,12 @@ export class SolitairePage implements OnInit {
       this.currentCard = null;
       this.setGameOver();
     } else {
+      this.toastCtrl.create({
+        message: 'Card Score: ' + this.score,
+        position: 'top',
+        duration: 1500
+      }).then(toast => toast.present());
+
       this.currentCard = this.deck[this.deck.indexOf(this.currentCard) + 1];
       this.index++;
       this.startTime = new Date();
@@ -69,6 +81,7 @@ export class SolitairePage implements OnInit {
 
   setGameOver() {
     this.gameOver = true;
+    this.showGameOver = true;
     this.sounds.play('game-over');
     console.log('Game over, score: ' + this.score);
     console.log(`Game over, game URL: /${this.symbolsPerCard}/${this.slug}`);
@@ -86,12 +99,6 @@ export class SolitairePage implements OnInit {
     const timeElapsed = new Date().getTime() - this.startTime.getTime();
     const maxScore = 1000 * this.symbolsPerCard - 500 * this.incorrectSelections - timeElapsed;
     const score = Math.max(50, maxScore);
-
-    this.toastCtrl.create({
-      message: 'Card Score: ' + score,
-      position: 'top',
-      duration: 2500
-    }).then(toast => toast.present());
 
     return score;
   }
