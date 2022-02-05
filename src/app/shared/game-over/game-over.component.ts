@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-game-over',
@@ -21,11 +22,12 @@ export class GameOverComponent implements OnInit {
     { name: 'linkedin', image: 'logo-linkedin' },
   ];
 
-  constructor() { }
+  constructor(private clipboard: Clipboard) { }
+
 
   ngOnInit(): void {
     this.shareText = `I scored ${this.score} points in SpyDuh (${this.game} ` +
-    `with ${this.symbols} symbols per card). Try to beat my score at `;
+      `with ${this.symbols} symbols per card). Try to beat my score at `;
+      this.clipboard.copy(`${this.shareText}${this.gameUrl}.`);
   }
-
 }
