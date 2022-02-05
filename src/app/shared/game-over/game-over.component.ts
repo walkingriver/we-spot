@@ -14,11 +14,18 @@ export class GameOverComponent implements OnInit {
   gameUrl = document.location.href;
   shareText = '';
 
+  shareButtons = [
+    { name: 'twitter', image: 'logo-twitter' },
+    { name: 'facebook', image: 'logo-facebook' },
+    { name: 'pinterest', image: 'logo-pinterest' },
+    { name: 'linkedin', image: 'logo-linkedin' },
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
     this.shareText = `I scored ${this.score} points in SpyDuh (${this.game}
-    with ${this.symbols} symbols per card). Try to beat my score at ${this.gameUrl}.`;
+    with ${this.symbols} symbols per card). Try to beat my score at `;
   }
 
 }

@@ -15,7 +15,22 @@
     <h1>Share Your Success with the World</h1>
     <p>
       {{shareText}}
+      {{gameUrl}}.
     </p>
   </div>
+
+  <ion-toolbar color="transparent">
+    <ion-buttons slot="start">
+      <ng-container *ngFor="let button of shareButtons">
+        <ion-button [shareButton]="button.name"
+          [description]="shareText"
+          [url]="gameUrl"
+          title="I won at SpyDuh!">
+          <ion-icon slot="icon-only"
+            [name]="button.image"></ion-icon>
+        </ion-button>
+      </ng-container>
+    </ion-buttons>
+  </ion-toolbar>
 
 </ion-content>
