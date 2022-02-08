@@ -21,6 +21,7 @@ export type GameSoundName =
 })
 export class SoundService {
   sounds: GameSound[] = [];
+  currentSound: HTMLAudioElement;
 
   constructor() {
     this.sounds = this.loadSounds();
@@ -33,9 +34,18 @@ export class SoundService {
     }));
   }
 
+  stop() {
+    if (this.currentSound?.ended && ! this.currentSound.ended ) {
+      this.currentSound.pause();
+      this.currentSound.currentTime = 0;
+    }
+  }
+
   play(name: GameSoundName): Promise<void> {
+    stop();
     const sound = this.sounds.find(s => s.name === name);
     if (sound) {
+      this.currentSound = sound.audio;
       return sound.audio.play();
     }
 
