@@ -24,3 +24,17 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@media (prefers-color-scheme: dark) {
+  ion-content.texture {
+    background-repeat: repeat;
+    --background: url("/assets/images/dark-2784188_640.png");
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  ion-content.texture {
+    background-repeat: repeat;
+    --background: url("/assets/images/background-1879623_640.jpg");
+  }
+}

@@ -15,7 +15,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="texture">
   <ion-card>
     <ion-card-header color="secondary">
       <ion-card-subtitle>
@@ -35,7 +35,7 @@
           </ion-button>
         </ion-item>
         <ion-item>
-          <ion-label position="stacked">Number of symbols per card: </ion-label>
+          <ion-label position="stacked">Difficulty: </ion-label>
           <ion-select [(ngModel)]="selectedNumberOfSymbols"
             interface="popover">
             <ion-select-option *ngFor="let validSymbol of validSymbols"

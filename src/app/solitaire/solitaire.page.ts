@@ -57,6 +57,7 @@ export class SolitairePage implements OnInit {
     console.log('previousCard: ' + JSON.stringify(this.previousCard));
 
     this.sounds.play('start');
+    this.startTime = new Date();
   }
 
   async confirmStart() {
