@@ -9,12 +9,20 @@ import { generateSlug, RandomWordOptions, totalUniqueSlugs } from 'random-word-s
 export class SetupPage implements OnInit {
   selectedNumberOfSymbols = 6;
   validSymbols = [
-    { label: '4 - Easy', value: 4 },
-    { label: '6 - Medium', value: 6 },
-    { label: '8 - Hard', value: 8 },
-    { label: '12 - Extreme', value: 12 },
+    { label: 'Easy - 13 cards, 4 symbols', value: 4 },
+    { label: 'Medium - 31 cards, 6 symbols', value: 6 },
+    { label: 'Hard - 57 cards, 8 symbols', value: 8 },
+    { label: 'Extreme - 133 cards, 12 symbols', value: 12 },
   ];
-  deck: number[][] = [];
+  selectedDeckSize = 1;
+  deckSizes = [
+    { label: 'Full Deck', value: 1 },
+    { label: '3/4 Deck', value: 0.75 },
+    { label: '1/2 Deck', value: 0.50 },
+    { label: '1/3 Deck', value: 0.333 },
+    { label: '1/4 Deck', value: 0.25 },
+    { label: '1/5 Deck', value: 0.20 },
+  ];
   options: RandomWordOptions<3> = {
     format: 'kebab',
     partsOfSpeech: ['noun', 'noun', 'noun'],

@@ -42,9 +42,18 @@
               [value]="validSymbol.value">{{validSymbol.label}}</ion-select-option>
           </ion-select>
         </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Deck Size: </ion-label>
+          <ion-select [(ngModel)]="selectedDeckSize"
+            interface="popover">
+            <ion-select-option *ngFor="let size of deckSizes"
+              [value]="size.value">{{size.label}}</ion-select-option>
+          </ion-select>
+        </ion-item>
       </ion-list>
       <ion-button color="primary"
         [routerLink]="['/solitaire', selectedNumberOfSymbols, slug]"
+        [queryParams]="{deckSize: selectedDeckSize}"
         routerDirection="forward"
         expand="block">
         Start

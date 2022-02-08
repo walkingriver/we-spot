@@ -37,7 +37,12 @@ export class SolitairePage implements OnInit {
     this.slug = this.route.snapshot.paramMap.get('slug') || '';
 
     this.deck = this.deckService.buildDeck(this.symbolsPerCard, this.slug);
-    this.deckSize = +this.route.snapshot.queryParamMap.get('deckSize') || this.deck.length;
+    let deckMultiplier = +this.route.snapshot.queryParamMap.get('deckSize') || 1;
+    if (deckMultiplier > 1) {
+      deckMultiplier = 1;
+    }
+
+    this.deckSize = Math.floor(this.deck.length * deckMultiplier);
 
     this.confirmStart();
   }
