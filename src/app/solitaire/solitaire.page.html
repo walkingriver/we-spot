@@ -24,7 +24,7 @@
         sizeXl="6"
         sizeSm="6"
         sizeXs="12">
-        <app-dobble-card title="Look at this card ({{index}})"
+        <app-dobble-card title="Look at this card ({{index}} remaining)"
           *ngIf="previousCard"
           [card]="previousCard"></app-dobble-card>
       </ion-col>
@@ -52,6 +52,7 @@
         [score]="score"
         [game]="slug"
         [symbols]="symbolsPerCard"
+        [deckSize]="deckSize"
         [card]="previousCard"></app-game-over>
     </ng-template>
   </ion-modal>

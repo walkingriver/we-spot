@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IonRouterOutlet, ToastController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController, ToastController } from '@ionic/angular';
 import { DeckService } from '../deck/deck.service';
 import { SoundService } from '../sound.service';
 import { CardSymbol } from '../symbols';
@@ -22,9 +22,12 @@ export class SolitairePage implements OnInit {
   gameOver = false;
   showGameOver = false;
   incorrectSelections = 0;
+  deckSize = 0;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
+    private alertCtrl: AlertController,
     private toastCtrl: ToastController,
     private deckService: DeckService,
     private sounds: SoundService) { }
@@ -34,15 +37,40 @@ export class SolitairePage implements OnInit {
     this.slug = this.route.snapshot.paramMap.get('slug') || '';
 
     this.deck = this.deckService.buildDeck(this.symbolsPerCard, this.slug);
+    this.deckSize = +this.route.snapshot.queryParamMap.get('deckSize') || this.deck.length;
 
-    // Uncomment this line when debugging to get to the
-    // end of the deck quickly without playing the whole game.
-    // this.index = this.deck.length - 2;
+    this.confirmStart();
+  }
 
-    this.currentCard = this.deck[1];
-    this.previousCard = this.deck[0];
+  startGame() {
+    // We'll deal from the end of the deck, so the first card is the last card in the deck.
+    this.index = this.deckSize - 1;
+
+    this.previousCard = this.deck[this.index];
+    this.currentCard = this.deck[this.index - 1];
+    console.log('currentCard: ' + JSON.stringify(this.currentCard));
+    console.log('previousCard: ' + JSON.stringify(this.previousCard));
 
     this.sounds.play('start');
+  }
+
+  async confirmStart() {
+    console.log('deckSize: ' + this.deckSize);
+
+    const alert = await this.alertCtrl.create({
+      header: 'Start Game',
+      subHeader: this.slug || 'Random Unnamed Game',
+      message: `You will be playing with ${this.deckSize} cards.`,
+      buttons: [
+        { text: 'Go to Setup', handler: () => this.goToSetup() },
+        { text: 'Start Game', handler: () => this.startGame() }
+      ]
+    });
+    await alert.present();
+  }
+
+  goToSetup() {
+    this.router.navigate(['/setup']);
   }
 
   onSymbolClick(symbolClicked: CardSymbol) {
@@ -52,29 +80,31 @@ export class SolitairePage implements OnInit {
 
     if (matchingSymbol) {
       this.sounds.playSuccessSound();
-      this.score += this.calculateScore();
-      this.advanceCard();
+      const cardScore = this.calculateScore();
+      this.score += cardScore;
+      this.dealCard(cardScore);
     } else {
       this.sounds.playFailureSound();
       this.incorrectSelections++;
     }
   }
 
-  advanceCard() {
+  dealCard(cardScore: number) {
     this.previousCard = this.currentCard;
+    this.index--;
 
-    if (this.index >= this.deck.length - 1) {
+    if (this.index <= 0) {
       this.currentCard = null;
       this.setGameOver();
     } else {
       this.toastCtrl.create({
-        message: 'Card Score: ' + this.score,
+        message: 'Card Score: ' + cardScore,
         position: 'top',
+        animated: true,
         duration: 1500
       }).then(toast => toast.present());
 
-      this.currentCard = this.deck[this.deck.indexOf(this.currentCard) + 1];
-      this.index++;
+      this.currentCard = this.deck[this.deck.indexOf(this.currentCard) - 1];
       this.startTime = new Date();
     }
   }

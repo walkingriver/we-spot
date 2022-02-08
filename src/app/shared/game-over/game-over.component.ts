@@ -8,6 +8,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 })
 export class GameOverComponent implements OnInit {
   @Input() score = 0;
+  @Input() deckSize = 0;
   @Input() game = '';
   @Input() symbols = 0;
   @Input() card = [];
@@ -26,8 +27,9 @@ export class GameOverComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.shareText = `I scored ${this.score} points in SpyDuh (${this.game} ` +
-      `with ${this.symbols} symbols per card). Try to beat my score at `;
+    this.shareText = `I scored ${this.score} points in SpyDuh (${this.game}),
+ ${this.deckSize}-card deck with ${this.symbols} symbols per card.
+🏁 Try to beat my score at `;
       this.clipboard.copy(`${this.shareText}${this.gameUrl}.`);
   }
 }
