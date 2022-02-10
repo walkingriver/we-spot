@@ -53,18 +53,33 @@ export class SolitairePage implements OnInit {
   }
 
   configureAnimations() {
+    const exitWest = this.animationCtrl.create()
+      .addElement(document.querySelector('#previous-card'))
+      .fromTo('transform', 'translateX(0px)', 'translateX(-500%)');
+
+    const exitEast = this.animationCtrl.create()
+      .addElement(document.querySelector('#current-card'))
+      .fromTo('transform', 'translateX(0px)', 'translateX(500%)');
+
+    const enterWest = this.animationCtrl.create()
+      .addElement(document.querySelector('#previous-card'))
+      .fromTo('transform', 'translateX(-500%)', 'translateX(-0px)');
+
+    const enterEast = this.animationCtrl.create()
+      .addElement(document.querySelector('#current-card'))
+      .fromTo('transform', 'translateX(500%)', 'translateX(0px)');
+
     this.exitAnimation =
       this.animationCtrl.create('exit')
-        .addElement(document.querySelector('#previous-card'))
-        .addElement(document.querySelector('#current-card'))
-        .duration(500)
-        .fromTo('transform', 'translateX(0px)', 'translateX(-500%)');
+        .duration(1000)
+        .direction('alternate')
+        .easing('ease-in-out')
+        .addAnimation([exitWest, exitEast]);
 
     this.enterAnimation = this.animationCtrl.create('enter')
-      .addElement(document.querySelector('#current-card'))
-      .addElement(document.querySelector('#previous-card'))
-      .duration(500)
-      .fromTo('transform', 'translateX(500%)', 'translateX(0px)');
+      .duration(1000)
+      .easing('ease-in-out')
+      .addAnimation([enterWest, enterEast]);
   }
 
   startGame() {
@@ -119,9 +134,9 @@ export class SolitairePage implements OnInit {
 
   async dealCard() {
     await this.exitAnimation.play();
-    this.exitAnimation.stop();
     this.previousCard = this.currentCard;
     this.index--;
+    this.exitAnimation.stop();
 
     if (this.index <= 0) {
       this.currentCard = null;
@@ -129,10 +144,8 @@ export class SolitairePage implements OnInit {
     } else {
 
       this.currentCard = this.deck[this.deck.indexOf(this.currentCard) - 1];
-
       await this.enterAnimation.play();
       this.enterAnimation.stop();
-
       this.startTime = new Date();
     }
   }
