@@ -71,13 +71,13 @@ export class SolitairePage implements OnInit {
 
     this.exitAnimation =
       this.animationCtrl.create('exit')
-        .duration(1000)
+        .duration(500)
         .direction('alternate')
         .easing('ease-in-out')
         .addAnimation([exitWest, exitEast]);
 
     this.enterAnimation = this.animationCtrl.create('enter')
-      .duration(1000)
+      .duration(500)
       .easing('ease-in-out')
       .addAnimation([enterWest, enterEast]);
   }
