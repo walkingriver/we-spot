@@ -21,6 +21,28 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-menu-toggle *ngIf="(isEnabled | async);else disabled"
+            auto-hide="false">
+            <ion-item button (click)="sounds.disable()">
+              <ion-icon slot="start"
+                name="volume-medium"></ion-icon>
+              <ion-label>
+                Sounds On
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ng-template #disabled>
+            <ion-menu-toggle
+              auto-hide="false">
+              <ion-item button (click)="sounds.enable()">
+                <ion-icon slot="start"
+                  name="volume-mute"></ion-icon>
+                <ion-label>
+                  Sounds Off
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ng-template>
         </ion-list>
       </ion-content>
       <ion-footer>

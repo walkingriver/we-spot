@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Storage } from '@capacitor/storage';
 
 interface GameSound {
   name: string;
@@ -22,9 +24,34 @@ export type GameSoundName =
 export class SoundService {
   sounds: GameSound[] = [];
   currentSound: HTMLAudioElement;
+  enabled: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  private isEnabled = true;
 
   constructor() {
     this.sounds = this.loadSounds();
+
+    Storage.get({ key: 'soundEnabled' })
+      .then(result => {
+        if (JSON.parse(result.value)) {
+          this.enable();
+        } else {
+          this.disable();
+        }
+      });
+  }
+
+  enable() {
+    this.set(true);
+  }
+
+  disable() {
+    this.set(false);
+  }
+
+  set(value: boolean) {
+    this.isEnabled = value;
+    this.enabled.next(value);
+    Storage.set({ key: 'soundEnabled', value: JSON.stringify(value) });
   }
 
   loadSounds(): GameSound[] {
@@ -35,18 +62,20 @@ export class SoundService {
   }
 
   stop() {
-    if (this.currentSound?.ended && ! this.currentSound.ended ) {
+    if (this.currentSound?.ended && !this.currentSound.ended) {
       this.currentSound.pause();
       this.currentSound.currentTime = 0;
     }
   }
 
   play(name: GameSoundName): Promise<void> {
-    stop();
-    const sound = this.sounds.find(s => s.name === name);
-    if (sound) {
-      this.currentSound = sound.audio;
-      return sound.audio.play();
+    if (this.isEnabled) {
+      stop();
+      const sound = this.sounds.find(s => s.name === name);
+      if (sound) {
+        this.currentSound = sound.audio;
+        return sound.audio.play();
+      }
     }
 
     return Promise.resolve();

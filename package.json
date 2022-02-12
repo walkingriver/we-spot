@@ -1,6 +1,6 @@
 {
   "name": "SpyDuh",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "author": "Michael D. Callaghan",
   "homepage": "https://walkingriver.com/",
   "scripts": {
@@ -29,6 +29,7 @@
     "@capacitor/haptics": "1.1.3",
     "@capacitor/keyboard": "1.2.0",
     "@capacitor/status-bar": "1.0.6",
+    "@capacitor/storage": "^1.2.4",
     "@ionic/angular": "^6.0.0",
     "bigint-hash": "^0.2.2",
     "ngx-sharebuttons": "^10.0.0",

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import packageJson from '../../package.json';
+import { SoundService } from './sound.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,8 @@ export class AppComponent {
     // { title: 'Terms & Conditions', url: '/terms', icon: 'book' }
   ];
 
+  isEnabled = this.sounds.enabled.asObservable();
+
   public appVersion: string = packageJson.version;
-  constructor() {}
+  constructor(public sounds: SoundService) {}
 }
