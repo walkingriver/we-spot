@@ -4,6 +4,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { DeckService } from '../deck/deck.service';
 import { SoundService } from '../sound.service';
 import { CardSymbol } from '../symbols';
+import { Animation, AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-solitaire',
@@ -23,8 +24,11 @@ export class SolitairePage implements OnInit {
   showGameOver = false;
   incorrectSelections = 0;
   deckSize = 0;
+  enterAnimation: Animation;
+  exitAnimation: Animation;
 
   constructor(
+    private animationCtrl: AnimationController,
     private route: ActivatedRoute,
     private router: Router,
     private alertCtrl: AlertController,
@@ -44,7 +48,38 @@ export class SolitairePage implements OnInit {
 
     this.deckSize = Math.floor(this.deck.length * deckMultiplier);
 
+    this.configureAnimations();
     this.confirmStart();
+  }
+
+  configureAnimations() {
+    const exitWest = this.animationCtrl.create()
+      .addElement(document.querySelector('#previous-card'))
+      .fromTo('transform', 'translateX(0px)', 'translateX(-500%)');
+
+    const exitEast = this.animationCtrl.create()
+      .addElement(document.querySelector('#current-card'))
+      .fromTo('transform', 'translateX(0px)', 'translateX(500%)');
+
+    const enterWest = this.animationCtrl.create()
+      .addElement(document.querySelector('#previous-card'))
+      .fromTo('transform', 'translateX(-500%)', 'translateX(-0px)');
+
+    const enterEast = this.animationCtrl.create()
+      .addElement(document.querySelector('#current-card'))
+      .fromTo('transform', 'translateX(500%)', 'translateX(0px)');
+
+    this.exitAnimation =
+      this.animationCtrl.create('exit')
+        .duration(500)
+        .direction('alternate')
+        .easing('ease-in-out')
+        .addAnimation([exitWest, exitEast]);
+
+    this.enterAnimation = this.animationCtrl.create('enter')
+      .duration(500)
+      .easing('ease-in-out')
+      .addAnimation([enterWest, enterEast]);
   }
 
   startGame() {
@@ -67,6 +102,7 @@ export class SolitairePage implements OnInit {
       header: 'Start Game',
       subHeader: this.slug || 'Random Unnamed Game',
       message: `You will be playing with ${this.deckSize} cards.`,
+      backdropDismiss: false,
       buttons: [
         { text: 'Go to Setup', handler: () => this.goToSetup() },
         { text: 'Start Game', handler: () => this.startGame() }
@@ -79,7 +115,7 @@ export class SolitairePage implements OnInit {
     this.router.navigate(['/setup']);
   }
 
-  onSymbolClick(symbolClicked: CardSymbol) {
+  async onSymbolClick(symbolClicked: CardSymbol) {
     console.log(symbolClicked);
 
     const matchingSymbol = this.previousCard.find(symbol => symbol.fileName === symbolClicked.fileName);
@@ -88,31 +124,41 @@ export class SolitairePage implements OnInit {
       this.sounds.playSuccessSound();
       const cardScore = this.calculateScore();
       this.score += cardScore;
-      this.dealCard(cardScore);
+      await this.showCardScore(cardScore);
+      await this.dealCard();
     } else {
       this.sounds.playFailureSound();
       this.incorrectSelections++;
     }
   }
 
-  dealCard(cardScore: number) {
+  async dealCard() {
+    await this.exitAnimation.play();
     this.previousCard = this.currentCard;
     this.index--;
+    this.exitAnimation.stop();
 
     if (this.index <= 0) {
       this.currentCard = null;
       this.setGameOver();
     } else {
-      this.toastCtrl.create({
-        message: 'Card Score: ' + cardScore,
-        position: 'top',
-        animated: true,
-        duration: 1500
-      }).then(toast => toast.present());
 
       this.currentCard = this.deck[this.deck.indexOf(this.currentCard) - 1];
+      await this.enterAnimation.play();
+      this.enterAnimation.stop();
       this.startTime = new Date();
     }
+  }
+
+  async showCardScore(score) {
+    const toast = await this.toastCtrl.create({
+      message: 'Card Score: ' + score,
+      position: 'top',
+      animated: true,
+      duration: 1500
+    });
+
+    await toast.present();
   }
 
   setGameOver() {
