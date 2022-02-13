@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
 import packageJson from '../../package.json';
 import { SoundService } from './sound.service';
+import { delay, filter, map, take, tap } from 'rxjs/operators';
+import { IonMenu } from '@ionic/angular';
+import { of, timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +12,8 @@ import { SoundService } from './sound.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  @ViewChild('menu', { static: true }) menu: IonMenu;
+
   appPages = [
     { title: 'Home', url: '/home', icon: 'home' },
     { title: 'New Game', url: '/setup', icon: 'play' },
@@ -17,7 +23,21 @@ export class AppComponent {
   ];
 
   isEnabled = this.sounds.enabled.asObservable();
+  updateAvailable =
+    this.updater.versionUpdates
+      .pipe(
+        filter(event => event.type === 'VERSION_READY'),
+        map(event => event as VersionReadyEvent),
+        map(event => event.latestVersion.hash !== event.currentVersion.hash),
+        tap(_ => { this.menu.open(); })
+      );
 
   public appVersion: string = packageJson.version;
-  constructor(public sounds: SoundService) {}
+  constructor(public sounds: SoundService,
+    private updater: SwUpdate) { }
+
+  async reload() {
+    await this.updater.activateUpdate();
+    document.location.reload();
+  }
 }
