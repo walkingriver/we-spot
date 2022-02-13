@@ -36,7 +36,8 @@ export class AppComponent {
   constructor(public sounds: SoundService,
     private updater: SwUpdate) { }
 
-  reload() {
+  async reload() {
+    await this.updater.activateUpdate();
     document.location.reload();
   }
 }
