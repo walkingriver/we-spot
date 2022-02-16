@@ -17,14 +17,15 @@
 </ion-header>
 
 <ion-content class="texture">
-  <app-card-table *ngIf="!gameOver" [cards]="[previousCard, currentCard]"
-  (symbolSelected)="onSymbolClick($event)">
+  <app-card-table *ngIf="!gameOver"
+    [cards]="[previousCard, currentCard]"
+    (symbolSelected)="onSymbolClick($event)">
   </app-card-table>
 
   <ion-modal [isOpen]="gameOver && showGameOver"
     (didDismiss)="showGameOver=false"
     [keyboardClose]="true"
-    [breakpoints]="[0.5, 0.75]"
+    [breakpoints]="[0.5, 0.75, 1]"
     [initialBreakpoint]="0.75"
     [swipeToClose]="true">
     <ng-template>
@@ -41,7 +42,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-title>
-      <ion-label>Score: {{score}}</ion-label>
+      <ion-label *ngIf="score">Score: {{score}}</ion-label>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button *ngIf="gameOver"
@@ -52,3 +53,9 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
+
+<ion-fab *ngIf="currentCard && index" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="primary">
+    {{index}}
+  </ion-fab-button>
+</ion-fab>
