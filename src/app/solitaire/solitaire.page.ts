@@ -118,9 +118,11 @@ export class SolitairePage implements OnInit {
   async onSymbolClick(symbolClicked: CardSymbol) {
     console.log(symbolClicked);
 
-    const matchingSymbol = this.previousCard.find(symbol => symbol.fileName === symbolClicked.fileName);
+    const allSymbols = this.currentCard.concat(this.previousCard);
 
-    if (matchingSymbol) {
+    const matchingSymbol = allSymbols.filter(symbol => symbol.fileName === symbolClicked.fileName);
+
+    if (matchingSymbol?.length > 1) {
       this.sounds.playSuccessSound();
       const cardScore = this.calculateScore();
       this.score += cardScore;

@@ -1,9 +1,25 @@
-<ion-card class="symbols symbols-{{card.length}}">
-  <ion-card-header color="secondary">
+<ion-card class="symbols symbols-{{card?.length}}">
+  <!-- <ion-card-header color="secondary">
     <ion-card-subtitle>{{title}}</ion-card-subtitle>
-  </ion-card-header>
-  <ion-grid fixed>
-    <ion-row>
+  </ion-card-header> -->
+  <ion-grid>
+    <!-- <ion-row *ngFor="let rows of cardGrid; let r = index"
+      class="ion-justify-content-center">
+      <ion-col *ngFor="let col of rows; let c = index"
+        class="ion-align-self-center"
+        [size]="size">
+        <ion-icon *ngIf="col as cardSymbol"
+          class="bigger"
+          appRandomRotation
+          (click)="onSymbolClick(cardSymbol)"
+          src="/assets/symbols/{{cardSymbol?.fileName}}"
+          [title]="cardSymbol?.fileName">
+        </ion-icon>
+      </ion-col>
+    </ion-row> -->
+
+
+    <!-- <ion-row>
       <ion-col *ngFor="let cardSymbol of card">
         <ion-icon class="bigger"
           appRandomRotation
@@ -12,6 +28,18 @@
           [title]="cardSymbol?.fileName">
         </ion-icon>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
   </ion-grid>
+
+  <ion-card-content class="card-grid cards-{{card?.length}}">
+    <div *ngFor="let cardSymbol of card">
+      <ion-icon class="bigger ion-align-self-center"
+        appRandomRotation
+        (click)="onSymbolClick(cardSymbol)"
+        src="/assets/symbols/{{cardSymbol?.fileName}}"
+        [title]="cardSymbol?.fileName">
+      </ion-icon>
+    </div>
+  </ion-card-content>
+
 </ion-card>

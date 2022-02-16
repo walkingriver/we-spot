@@ -17,33 +17,9 @@
 </ion-header>
 
 <ion-content class="texture">
-  <ion-grid>
-    <ion-row>
-      <ion-col sizeLg="6"
-        sizeMd="6"
-        sizeXl="6"
-        sizeSm="6"
-        sizeXs="12">
-        <div id="previous-card">
-          <app-dobble-card title="Look at this card ({{index}} remaining)"
-            *ngIf="previousCard && !gameOver"
-            [card]="previousCard"></app-dobble-card>
-        </div>
-      </ion-col>
-      <ion-col sizeLg="6"
-        sizeMd="6"
-        sizeXl="6"
-        sizeSm="6"
-        sizeXs="12">
-        <div id="current-card">
-          <app-dobble-card (symbolClick)="onSymbolClick($event)"
-            *ngIf="currentCard"
-            title="Select the ONE matching symbol on this card"
-            [card]="currentCard"></app-dobble-card>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <app-card-table *ngIf="!gameOver" [cards]="[previousCard, currentCard]"
+  (symbolSelected)="onSymbolClick($event)">
+  </app-card-table>
 
   <ion-modal [isOpen]="gameOver && showGameOver"
     (didDismiss)="showGameOver=false"
