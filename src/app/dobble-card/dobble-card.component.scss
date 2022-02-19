@@ -5,54 +5,55 @@ ion-icon {
   // font-size: 2.5rem;
 }
 
+.symbol {
+  text-align: center;
+}
+
+@media screen and (orientation:portrait) {
+  .card-grid.symbols-4 {
+    --grid-column-count: 2;
+  }
+  .card-grid.symbols-6 {
+    --grid-column-count: 6;
+  }
+  .card-grid.symbols-8 {
+    --grid-column-count: 3;
+  }
+  .card-grid.symbols-12 {
+    --grid-column-count: 6;
+  }
+}
+
+@media screen and (orientation:landscape) {
+  .card-grid.symbols-4 {
+    --grid-column-count: 4;
+  }
+  .card-grid.symbols-6 {
+    --grid-column-count: 6;
+  }
+  .card-grid.symbols-8 {
+    --grid-column-count: 4;
+  }
+  .card-grid.symbols-12 {
+    --grid-column-count: 6;
+  }
+}
+
 .card-grid {
+  /**
+   * User input values.
+   */
+  --grid-layout-gap: 10px;
+  --grid-item--min-width: 75px;
 
-  justify-content: center;
+  /**
+   * Calculated values.
+   */
+  --gap-count: calc(var(--grid-column-count) - 1);
+  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+  --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
+
   display: grid;
-  grid-gap: 0px;
-}
-
-.card-grid div {
-  width: 100%;
-  height: 100%;
-  padding: 2%;
-}
-
-ion-card-content.cards-4.card-grid {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-}
-
-@media (orientation: landscape) {
-  ion-card-content.cards-6.card-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-  }
-
-  ion-card-content.cards-8.card-grid {
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  ion-card-content.cards-12.card-grid {
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-@media (orientation: portrait) {
-  ion-card-content.cards-6.card-grid {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
-
-  ion-card-content.cards-8.card-grid {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
-
-  ion-card-content.cards-12.card-grid {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr));
+  grid-gap: var(--grid-layout-gap);
 }

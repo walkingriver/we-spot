@@ -31,8 +31,8 @@
     </ion-row> -->
   </ion-grid>
 
-  <ion-card-content class="card-grid cards-{{card?.length}}">
-    <div *ngFor="let cardSymbol of card">
+  <ion-card-content class="card-grid symbols-{{card?.length}}">
+    <div class="symbol" *ngFor="let cardSymbol of card">
       <ion-icon class="bigger ion-align-self-center"
         appRandomRotation
         (click)="onSymbolClick(cardSymbol)"
