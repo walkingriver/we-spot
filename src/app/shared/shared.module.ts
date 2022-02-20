@@ -5,11 +5,9 @@ import { DobbleCardComponent } from '../dobble-card/dobble-card.component';
 import { IonicModule } from '@ionic/angular';
 import { ShareModule } from 'ngx-sharebuttons';
 import { GameOverComponent } from './game-over/game-over.component';
-import { CardTableComponent } from './card-table/card-table.component';
 
 @NgModule({
   declarations: [
-    CardTableComponent,
     GameOverComponent,
     DobbleCardComponent,
     RandomRotationDirective,
@@ -20,7 +18,6 @@ import { CardTableComponent } from './card-table/card-table.component';
     ShareModule,
   ],
   exports: [
-    CardTableComponent,
     DobbleCardComponent,
     GameOverComponent,
     RandomRotationDirective,

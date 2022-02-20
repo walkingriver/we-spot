@@ -5,6 +5,10 @@ export interface CardSymbol {
 
 export type Card = CardSymbol[];
 
+export interface PlayingCard {
+  id: string;
+  symbols: Card;
+}
 
 /**
  * A map of card symbols. The referralUrl should point to
