@@ -101,15 +101,29 @@ export class SolitairePage implements OnInit {
     const matchingSymbol = allSymbols.filter(symbol => symbol.fileName === symbolClicked.fileName);
 
     if (matchingSymbol?.length > 1) {
+      await this.playCorrectAnimation(symbolClicked);
       this.sounds.playSuccessSound();
       const cardScore = this.calculateScore();
       this.score += cardScore;
       await this.showCardScore(cardScore);
       await this.dealCard();
     } else {
+      this.playIncorrectAnimation(symbolClicked);
       this.sounds.playFailureSound();
       this.incorrectSelections++;
     }
+  }
+
+  async playCorrectAnimation(symbolClicked: CardSymbol) {
+    const animation = this.animations
+      .getCorrectAnimation(`[title='${symbolClicked.fileName}']`);
+    await animation.play();
+  }
+
+  async playIncorrectAnimation(symbolClicked: CardSymbol) {
+    const animation = this.animations
+      .getIncorrectAnimation(`[title='${symbolClicked.fileName}']`);
+    await animation.play();
   }
 
   async dealCard() {
