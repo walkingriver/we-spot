@@ -7,7 +7,11 @@ import { ShareModule } from 'ngx-sharebuttons';
 import { GameOverComponent } from './game-over/game-over.component';
 
 @NgModule({
-  declarations: [RandomRotationDirective, DobbleCardComponent, GameOverComponent],
+  declarations: [
+    GameOverComponent,
+    DobbleCardComponent,
+    RandomRotationDirective,
+  ],
   imports: [
     CommonModule,
     IonicModule,
@@ -15,7 +19,8 @@ import { GameOverComponent } from './game-over/game-over.component';
   ],
   exports: [
     DobbleCardComponent,
+    GameOverComponent,
     RandomRotationDirective,
-    GameOverComponent]
+  ]
 })
 export class SharedModule { }

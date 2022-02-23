@@ -13,7 +13,7 @@ export class HomePage {
 
   constructor(private deckService: DeckService,
   ) {
-    this.deck = this.deckService.buildDeck(4);
+    this.deck = this.deckService.buildDeck(6);
     this.currentCard = this.deck[1];
     this.previousCard = this.deck[0];
   }

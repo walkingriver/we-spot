@@ -68,7 +68,7 @@ export class SoundService {
     }
   }
 
-  play(name: GameSoundName): Promise<void> {
+  play(name: string): Promise<void> {
     if (this.isEnabled) {
       stop();
       const sound = this.sounds.find(s => s.name === name);
@@ -83,8 +83,9 @@ export class SoundService {
 
   playRandom(soundNames: string[]): Promise<void> {
     const soundName = soundNames[Math.floor(Math.random() * soundNames.length)];
-    const sound = this.sounds.find(s => s.name === soundName);
-    return sound?.audio?.play();
+    return this.play(soundName);
+    // const sound = this.sounds.find(s => s.name === soundName);
+    // return sound?.audio?.play();
   }
 
   playFailureSound() {

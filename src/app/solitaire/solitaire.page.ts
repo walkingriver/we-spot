@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { DeckService } from '../deck/deck.service';
 import { SoundService } from '../sound.service';
-import { CardSymbol } from '../symbols';
+import { CardSymbol, PlayingCard } from '../symbols';
 import { Animation, AnimationController } from '@ionic/angular';
+import { AnimationService } from '../animation.service';
 
 @Component({
   selector: 'app-solitaire',
@@ -13,8 +14,8 @@ import { Animation, AnimationController } from '@ionic/angular';
 })
 export class SolitairePage implements OnInit {
   deck: CardSymbol[][];
-  currentCard: CardSymbol[];
-  previousCard: CardSymbol[];
+  currentCard: PlayingCard;
+  previousCard: PlayingCard;
   score = 0;
   index = 1;
   startTime = new Date();
@@ -28,7 +29,7 @@ export class SolitairePage implements OnInit {
   exitAnimation: Animation;
 
   constructor(
-    private animationCtrl: AnimationController,
+    private animations: AnimationService,
     private route: ActivatedRoute,
     private router: Router,
     private alertCtrl: AlertController,
@@ -53,41 +54,18 @@ export class SolitairePage implements OnInit {
   }
 
   configureAnimations() {
-    const exitWest = this.animationCtrl.create()
-      .addElement(document.querySelector('#previous-card'))
-      .fromTo('transform', 'translateX(0px)', 'translateX(-500%)');
-
-    const exitEast = this.animationCtrl.create()
-      .addElement(document.querySelector('#current-card'))
-      .fromTo('transform', 'translateX(0px)', 'translateX(500%)');
-
-    const enterWest = this.animationCtrl.create()
-      .addElement(document.querySelector('#previous-card'))
-      .fromTo('transform', 'translateX(-500%)', 'translateX(-0px)');
-
-    const enterEast = this.animationCtrl.create()
-      .addElement(document.querySelector('#current-card'))
-      .fromTo('transform', 'translateX(500%)', 'translateX(0px)');
-
-    this.exitAnimation =
-      this.animationCtrl.create('exit')
-        .duration(500)
-        .direction('alternate')
-        .easing('ease-in-out')
-        .addAnimation([exitWest, exitEast]);
-
-    this.enterAnimation = this.animationCtrl.create('enter')
-      .duration(500)
-      .easing('ease-in-out')
-      .addAnimation([enterWest, enterEast]);
+    this.enterAnimation = this.animations
+      .getEastWestEnterAnimation('#previous-card', '#current-card');
+    this.exitAnimation = this.animations
+      .getEastWestExitAnimation('#previous-card', '#current-card');
   }
 
   startGame() {
     // We'll deal from the end of the deck, so the first card is the last card in the deck.
     this.index = this.deckSize - 1;
 
-    this.previousCard = this.deck[this.index];
-    this.currentCard = this.deck[this.index - 1];
+    this.previousCard = { id: 'previous-card', symbols: this.deck[this.index] };
+    this.currentCard = { id: 'current-card', symbols: this.deck[this.index - 1] };
     console.log('currentCard: ' + JSON.stringify(this.currentCard));
     console.log('previousCard: ' + JSON.stringify(this.previousCard));
 
@@ -118,23 +96,40 @@ export class SolitairePage implements OnInit {
   async onSymbolClick(symbolClicked: CardSymbol) {
     console.log(symbolClicked);
 
-    const matchingSymbol = this.previousCard.find(symbol => symbol.fileName === symbolClicked.fileName);
+    const allSymbols = this.currentCard.symbols.concat(this.previousCard.symbols);
 
-    if (matchingSymbol) {
+    const matchingSymbol = allSymbols.filter(symbol => symbol.fileName === symbolClicked.fileName);
+
+    if (matchingSymbol?.length > 1) {
+      await this.playCorrectAnimation(symbolClicked);
       this.sounds.playSuccessSound();
       const cardScore = this.calculateScore();
       this.score += cardScore;
       await this.showCardScore(cardScore);
       await this.dealCard();
     } else {
+      this.playIncorrectAnimation(symbolClicked);
       this.sounds.playFailureSound();
       this.incorrectSelections++;
     }
   }
 
+  async playCorrectAnimation(symbolClicked: CardSymbol) {
+    const animation = this.animations
+      .getCorrectAnimation(`[title='${symbolClicked.fileName}']`);
+    await animation.play();
+  }
+
+  async playIncorrectAnimation(symbolClicked: CardSymbol) {
+    const animation = this.animations
+      .getIncorrectAnimation(`[title='${symbolClicked.fileName}']`);
+    await animation.play();
+  }
+
   async dealCard() {
     await this.exitAnimation.play();
     this.previousCard = this.currentCard;
+    this.previousCard.id = 'previous-card';
     this.index--;
     this.exitAnimation.stop();
 
@@ -143,7 +138,10 @@ export class SolitairePage implements OnInit {
       this.setGameOver();
     } else {
 
-      this.currentCard = this.deck[this.deck.indexOf(this.currentCard) - 1];
+      this.currentCard = {
+        id: '#current-card',
+        symbols: this.deck[this.index - 1]
+      };
       await this.enterAnimation.play();
       this.enterAnimation.stop();
       this.startTime = new Date();

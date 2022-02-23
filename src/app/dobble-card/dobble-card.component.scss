@@ -1,6 +1,59 @@
 
 ion-icon {
   background-color: transparent;
-  font-size: calc((.4em + 3vmin) + (.4em + 3vmax));
+  font-size: calc((0.3em + 3vmin) + (0.3em + 3vmax));
   // font-size: 2.5rem;
+}
+
+.symbol {
+  text-align: center;
+}
+
+@media screen and (orientation:portrait) {
+  .card-grid.symbols-4 {
+    --grid-column-count: 2;
+  }
+  .card-grid.symbols-6 {
+    --grid-column-count: 6;
+  }
+  .card-grid.symbols-8 {
+    --grid-column-count: 3;
+  }
+  .card-grid.symbols-12 {
+    --grid-column-count: 6;
+  }
+}
+
+@media screen and (orientation:landscape) {
+  .card-grid.symbols-4 {
+    --grid-column-count: 4;
+  }
+  .card-grid.symbols-6 {
+    --grid-column-count: 6;
+  }
+  .card-grid.symbols-8 {
+    --grid-column-count: 4;
+  }
+  .card-grid.symbols-12 {
+    --grid-column-count: 6;
+  }
+}
+
+.card-grid {
+  /**
+   * User input values.
+   */
+  --grid-layout-gap: 10px;
+  --grid-item--min-width: 75px;
+
+  /**
+   * Calculated values.
+   */
+  --gap-count: calc(var(--grid-column-count) - 1);
+  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+  --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr));
+  grid-gap: var(--grid-layout-gap);
 }

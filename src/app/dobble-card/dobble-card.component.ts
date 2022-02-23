@@ -7,18 +7,27 @@ import { CardSymbol } from '../symbols';
   styleUrls: ['./dobble-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DobbleCardComponent implements OnInit {
+export class DobbleCardComponent {
   @Input() card: CardSymbol[] = [];
   @Input() title = 'Card';
   @Output() symbolClick = new EventEmitter();
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  cardGrid = [];
 
   onSymbolClick(symbol: CardSymbol) {
     this.symbolClick.emit(symbol);
   }
 
+  splitArray(arr, rows) {
+    const itemsPerRow = Math.ceil(arr.length / rows);
+    return arr.reduce((acc, val, ind) => {
+      const currentRow = Math.floor(ind / itemsPerRow);
+      if (!acc[currentRow]) {
+        acc[currentRow] = [val];
+      } else {
+        acc[currentRow].push(val);
+      };
+      return acc;
+    }, []);
+  };
 }

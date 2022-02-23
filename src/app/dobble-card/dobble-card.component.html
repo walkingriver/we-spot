@@ -1,17 +1,15 @@
-<ion-card class="symbols symbols-{{card.length}}">
-  <ion-card-header color="secondary">
-    <ion-card-subtitle>{{title}}</ion-card-subtitle>
-  </ion-card-header>
-  <ion-grid fixed>
-    <ion-row>
-      <ion-col *ngFor="let cardSymbol of card">
-        <ion-icon class="bigger"
-          appRandomRotation
-          (click)="onSymbolClick(cardSymbol)"
-          src="/assets/symbols/{{cardSymbol?.fileName}}"
-          [title]="cardSymbol?.fileName">
-        </ion-icon>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-card class="symbols symbols-{{card?.length}}">
+
+  <ion-card-content class="card-grid symbols-{{card?.length}}">
+    <div class="symbol"
+      *ngFor="let cardSymbol of card"
+      appRandomRotation>
+      <ion-icon class="bigger ion-align-self-center"
+        (click)="onSymbolClick(cardSymbol)"
+        src="/assets/symbols/{{cardSymbol?.fileName}}"
+        [title]="cardSymbol?.fileName">
+      </ion-icon>
+    </div>
+  </ion-card-content>
+
 </ion-card>
