@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { DeckService } from '../deck/deck.service';
 import { SoundService } from '../sound.service';
-import { CardSymbol, PlayingCard } from '../symbols';
+import { CardSymbol, DeckInfo, PlayingCard } from '../symbols';
 import { Animation, AnimationController } from '@ionic/angular';
 import { AnimationService } from '../animation.service';
 
@@ -13,14 +13,12 @@ import { AnimationService } from '../animation.service';
   styleUrls: ['./solitaire.page.scss'],
 })
 export class SolitairePage implements OnInit {
-  deck: CardSymbol[][];
+  deckInfo: DeckInfo;
   currentCard: PlayingCard;
   previousCard: PlayingCard;
   score = 0;
   index = 1;
   startTime = new Date();
-  symbolsPerCard: number;
-  slug: string;
   gameOver = false;
   showGameOver = false;
   incorrectSelections = 0;
@@ -34,20 +32,18 @@ export class SolitairePage implements OnInit {
     private router: Router,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
-    private deckService: DeckService,
     private sounds: SoundService) { }
 
   ngOnInit() {
-    this.symbolsPerCard = +this.route.snapshot.paramMap.get('symbolsPerCard');
-    this.slug = this.route.snapshot.paramMap.get('slug') || '';
+    this.deckInfo = this.route.snapshot.data.deckInfo;
 
-    this.deck = this.deckService.buildDeck(this.symbolsPerCard, this.slug);
+    // Todo - move this to the resolver also
     let deckMultiplier = +this.route.snapshot.queryParamMap.get('deckSize') || 1;
     if (deckMultiplier > 1) {
       deckMultiplier = 1;
     }
 
-    this.deckSize = Math.floor(this.deck.length * deckMultiplier);
+    this.deckSize = Math.floor(this.deckInfo.deck.length * deckMultiplier);
 
     this.configureAnimations();
     this.confirmStart();
@@ -64,8 +60,8 @@ export class SolitairePage implements OnInit {
     // We'll deal from the end of the deck, so the first card is the last card in the deck.
     this.index = this.deckSize - 1;
 
-    this.previousCard = { id: 'previous-card', symbols: this.deck[this.index] };
-    this.currentCard = { id: 'current-card', symbols: this.deck[this.index - 1] };
+    this.previousCard = { id: 'previous-card', symbols: this.deckInfo.deck[this.index] };
+    this.currentCard = { id: 'current-card', symbols: this.deckInfo.deck[this.index - 1] };
     console.log('currentCard: ' + JSON.stringify(this.currentCard));
     console.log('previousCard: ' + JSON.stringify(this.previousCard));
 
@@ -78,7 +74,7 @@ export class SolitairePage implements OnInit {
 
     const alert = await this.alertCtrl.create({
       header: 'Start Game',
-      subHeader: this.slug || 'Random Unnamed Game',
+      subHeader: this.deckInfo.slug || 'Random Unnamed Game',
       message: `You will be playing with ${this.deckSize} cards.`,
       backdropDismiss: false,
       buttons: [
@@ -140,7 +136,7 @@ export class SolitairePage implements OnInit {
 
       this.currentCard = {
         id: '#current-card',
-        symbols: this.deck[this.index - 1]
+        symbols: this.deckInfo.deck[this.index - 1]
       };
       await this.enterAnimation.play();
       this.enterAnimation.stop();
@@ -164,7 +160,7 @@ export class SolitairePage implements OnInit {
     this.showGameOver = true;
     this.sounds.play('game-over');
     console.log('Game over, score: ' + this.score);
-    console.log(`Game over, game URL: /${this.symbolsPerCard}/${this.slug}`);
+    console.log(`Game over, game URL: /${this.deckInfo.symbolsPerCard}/${this.deckInfo.slug}`);
   }
 
   /**
@@ -177,7 +173,7 @@ export class SolitairePage implements OnInit {
    */
   calculateScore() {
     const timeElapsed = new Date().getTime() - this.startTime.getTime();
-    const maxScore = 1000 * this.symbolsPerCard - 500 * this.incorrectSelections - timeElapsed;
+    const maxScore = 1000 * this.deckInfo.symbolsPerCard - 500 * this.incorrectSelections - timeElapsed;
     const score = Math.max(50, maxScore);
 
     return score;
