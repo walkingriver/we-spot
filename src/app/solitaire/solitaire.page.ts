@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
-import { DeckService } from '../deck/deck.service';
 import { SoundService } from '../sound.service';
 import { CardSymbol, DeckInfo, PlayingCard } from '../symbols';
-import { Animation, AnimationController } from '@ionic/angular';
+import { Animation } from '@ionic/angular';
 import { AnimationService } from '../animation.service';
 
 @Component({
@@ -36,14 +35,7 @@ export class SolitairePage implements OnInit {
 
   ngOnInit() {
     this.deckInfo = this.route.snapshot.data.deckInfo;
-
-    // Todo - move this to the resolver also
-    let deckMultiplier = +this.route.snapshot.queryParamMap.get('deckSize') || 1;
-    if (deckMultiplier > 1) {
-      deckMultiplier = 1;
-    }
-
-    this.deckSize = Math.floor(this.deckInfo.deck.length * deckMultiplier);
+    this.deckSize = this.deckInfo.deck.length;
 
     this.configureAnimations();
     this.confirmStart();

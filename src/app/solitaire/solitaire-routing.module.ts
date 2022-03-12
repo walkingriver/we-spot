@@ -13,6 +13,11 @@ const routes: Routes = [
     path: ':symbolsPerCard/:slug',
     component: SolitairePage,
     resolve: { deckInfo: DeckResolver }
+  },
+  {
+    path: ':symbolsPerCard/:slug/:deckSize',
+    component: SolitairePage,
+    resolve: { deckInfo: DeckResolver }
   }
 ];
 
@@ -20,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SolitairePageRoutingModule {}
+export class SolitairePageRoutingModule { }
