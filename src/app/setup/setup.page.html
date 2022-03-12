@@ -52,8 +52,7 @@
         </ion-item>
       </ion-list>
       <ion-button color="primary"
-        [routerLink]="['/solitaire', selectedNumberOfSymbols, slug]"
-        [queryParams]="{deckSize: selectedDeckSize}"
+        [routerLink]="['/solitaire', selectedNumberOfSymbols, slug, selectedDeckSize]"
         routerDirection="forward"
         expand="block">
         Start

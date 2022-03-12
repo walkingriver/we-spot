@@ -39,8 +39,8 @@
     <ng-template>
       <app-game-over (closed)="showGameOver=false"
         [score]="score"
-        [game]="slug"
-        [symbols]="symbolsPerCard"
+        [game]="deckInfo?.slug"
+        [symbols]="deckInfo?.symbolsPerCard"
         [deckSize]="deckSize"
         [card]="previousCard.symbols"></app-game-over>
     </ng-template>

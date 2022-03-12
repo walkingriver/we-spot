@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DobbleService } from '../dobble.service';
 import { ShuffleService } from '../shuffle.service';
-import { CardSymbol, SYMBOLS } from '../symbols';
+import { CardSymbol, Deck, SYMBOLS } from '../symbols';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class DeckService {
    *
    * @param numberOfCards number of cards in the deck
    */
-  buildDeck(numberOfCards: number, slug = '') {
+  buildDeck(numberOfCards: number, slug = ''): Deck {
     this.shuffleService.seed(slug);
     this.shuffledSymbols = this.shuffleService.shuffle(SYMBOLS);
 

@@ -4,7 +4,12 @@ export interface CardSymbol {
 }
 
 export type Card = CardSymbol[];
-
+export type Deck = Card[];
+export interface DeckInfo {
+  symbolsPerCard: number;
+  slug: string;
+  deck: Deck;
+}
 export interface PlayingCard {
   id: string;
   symbols: Card;
