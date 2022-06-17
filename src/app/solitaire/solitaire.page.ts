@@ -126,6 +126,7 @@ export class SolitairePage implements OnInit {
       this.setGameOver();
     } else {
 
+      // Check to see if there are any cards left (not shown)
       this.currentCard = {
         id: '#current-card',
         symbols: this.deckInfo.deck[this.index - 1]
@@ -164,8 +165,11 @@ export class SolitairePage implements OnInit {
    * Minimum score for a card is 50.
    */
   calculateScore() {
-    const timeElapsed = new Date().getTime() - this.startTime.getTime();
-    const maxScore = 1000 * this.deckInfo.symbolsPerCard - 500 * this.incorrectSelections - timeElapsed;
+    const timeElapsed = new Date().getTime()
+      - this.startTime.getTime();
+    const maxScore = 1000 * this.deckInfo.symbolsPerCard
+      - 500 * this.incorrectSelections
+      - timeElapsed;
     const score = Math.max(50, maxScore);
 
     return score;

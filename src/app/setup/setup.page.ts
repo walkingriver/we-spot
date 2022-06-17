@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { generateSlug, RandomWordOptions, totalUniqueSlugs } from 'random-word-slugs';
+import { generateSlug, RandomWordOptions } from 'random-word-slugs';
 
 @Component({
   selector: 'app-setup',
@@ -23,18 +23,18 @@ export class SetupPage implements OnInit {
     { label: '1/4 Deck', value: 0.25 },
     { label: '1/5 Deck', value: 0.20 },
   ];
-  options: RandomWordOptions<3> = {
-    format: 'kebab',
-    partsOfSpeech: ['noun', 'noun', 'noun'],
-  };
   slug = '';
 
   ngOnInit(): void {
-    this.generateSlug();
+    this.slug = this.generateSlug();
   }
 
-  generateSlug() {
-    this.slug = generateSlug(3, this.options);
-    console.log(totalUniqueSlugs());
-  }
+generateSlug() {
+  const options: RandomWordOptions<3> = {
+    format: 'kebab',
+    partsOfSpeech: ['noun', 'noun', 'noun'],
+  };
+  const slug = generateSlug(3, options);
+  return slug;
+}
 }
