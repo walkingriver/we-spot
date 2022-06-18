@@ -1,4 +1,3 @@
-
 ion-card-content {
   position: relative;
   width: 100%;
@@ -30,34 +29,119 @@ ion-card-content {
 
   img {
     width: 90%;
-    height: auto;
+    height: 90%;
     object-fit: contain;
     opacity: 0.85;
   }
 
-   img:hover {
-      opacity: 1;
-    }
+  img:hover {
+    opacity: 1;
+  }
 }
 
 .symbols-4 {
   .symbol-wrapper:nth-of-type(1) {
     transform:
-      rotate(45deg) translate(80%) rotate(-45deg);
+      rotate(45deg) translate(85%) rotate(-45deg);
   }
 
   .symbol-wrapper:nth-of-type(2) {
     transform:
-    rotate(135deg) translate(80%) rotate(-135deg);  }
+      rotate(135deg) translate(80%) rotate(-135deg);
+  }
 
   .symbol-wrapper:nth-of-type(3) {
     transform:
-    rotate(225deg) translate(80%) rotate(-225deg);
+      rotate(225deg) translate(80%) rotate(-225deg);
   }
 
   .symbol-wrapper:nth-of-type(4) {
     transform:
-    rotate(315deg) translate(80%) rotate(-315deg);
+      rotate(180deg) translate(80%) rotate(-315deg);
+  }
+}
+
+.symbols-6 {
+  img {
+    width: 70%;
+    height: 70%;
+  }
+
+  .symbol-wrapper:nth-of-type(1) {
+    transform:
+      rotate(36deg) translate(95%) rotate(-36deg);
+  }
+
+  .symbol-wrapper:nth-of-type(2) {
+    transform:
+      rotate(108deg) translate(95%) rotate(-108deg);
+  }
+
+  .symbol-wrapper:nth-of-type(3) {
+    transform:
+      rotate(180deg) translate(95%) rotate(-180deg);
+  }
+
+  .symbol-wrapper:nth-of-type(4) {
+    transform:
+      rotate(252deg) translate(95%) rotate(-252deg);
+  }
+
+  .symbol-wrapper:nth-of-type(5) {
+    transform:
+      rotate(324deg) translate(95%) rotate(-324deg);
+  }
+
+  .symbol-wrapper:nth-of-type(6) {
+    transform:
+      rotate(0deg) translate(0%) rotate(0deg);
+  }
+}
+
+.symbols-8 {
+  img {
+    width: 70%;
+    height: 70%;
+  }
+
+  .symbol-wrapper:nth-of-type(1) {
+    transform:
+      rotate(26deg) translate(95%) rotate(-26deg);
+  }
+
+  .symbol-wrapper:nth-of-type(2) {
+    transform:
+      rotate(77deg) translate(95%) rotate(-77deg);
+  }
+
+  .symbol-wrapper:nth-of-type(3) {
+    transform:
+      rotate(128deg) translate(95%) rotate(-128deg);
+  }
+
+  .symbol-wrapper:nth-of-type(4) {
+    transform:
+      rotate(180deg) translate(95%) rotate(-180deg);
+  }
+
+  .symbol-wrapper:nth-of-type(5) {
+    transform:
+      rotate(232deg) translate(95%) rotate(-232deg);
+  }
+
+  .symbol-wrapper:nth-of-type(6) {
+    transform:
+      rotate(282deg) translate(95%) rotate(-282deg);
+  }
+
+  .symbol-wrapper:nth-of-type(7) {
+    transform:
+      rotate(334deg) translate(95%) rotate(-334deg);
+  }
+
+  .symbol-wrapper:nth-of-type(8) {
+    transform:
+      rotate(0deg) translate(0%) rotate(0deg);
   }
 }
 
