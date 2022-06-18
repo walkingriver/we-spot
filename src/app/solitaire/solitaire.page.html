@@ -18,14 +18,14 @@
 
 <ion-content class="texture">
   <div class="card-grid">
-    <div id="previous-card">
+    <div id="previous-card" class="card">
       <div class="spinner-prev">
         <app-dobble-card *ngIf="previousCard"
         (symbolClick)="onSymbolClick($event)"
         [card]="previousCard.symbols"></app-dobble-card>
       </div>
     </div>
-    <div id="current-card">
+    <div id="current-card" class="card">
       <div class="spinner-next">
         <app-dobble-card *ngIf="currentCard"
         (symbolClick)="onSymbolClick($event)"

@@ -1,35 +1,17 @@
 @media screen and (orientation: portrait) {
-  .card-grid {
-    --grid-column-count: 1;
+  .card {
+    display: inline-block;
+    width: min(40vh, 80vw);
   }
 }
 
 @media screen and (orientation: landscape) {
-  .card-grid {
-    --grid-column-count: 2;
+  .card {
+    display: inline-block;
+    width: min(80vh, 50vw);
   }
 }
 
 .card-grid {
-  /**
-  * User input values.
-  */
-  --grid-layout-gap: 10px;
-  --grid-item--min-width: 75px;
-
-  /**
-   * Calculated values.
-   */
-  --gap-count: calc(var(--grid-column-count) - 1);
-  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
-  --grid-item--max-width: calc(
-    (100% - var(--total-gap-width)) / var(--grid-column-count)
-  );
-
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr)
-  );
-  grid-gap: var(--grid-layout-gap);
+  text-align: center;
 }
