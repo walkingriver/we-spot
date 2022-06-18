@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AnimationController, Animation } from '@ionic/angular';
+const END_ANGLE = 720;
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ export class AnimationService {
   constructor(private animationCtrl: AnimationController) { }
 
   getEastWestExitAnimation(selectorWest, selectorEast): Animation {
+
     const exitWest = this.animationCtrl.create()
       .addElement(document.querySelector(selectorWest))
       .fromTo('transform', 'translateX(0px)', 'translateX(-500%)');
@@ -16,11 +18,19 @@ export class AnimationService {
       .addElement(document.querySelector(selectorEast))
       .fromTo('transform', 'translateX(0px)', 'translateX(500%)');
 
+    const spinnerWest = this.animationCtrl.create()
+      .addElement(document.querySelector(`${selectorWest} .spinner-prev`))
+      .fromTo('transform', 'rotate(0deg)', `rotate(-${END_ANGLE}deg`);
+
+    const spinnerEast = this.animationCtrl.create()
+      .addElement(document.querySelector(`${selectorEast} .spinner-next`))
+      .fromTo('transform', 'rotate(0deg)', `rotate(${END_ANGLE}deg`);
+
     return this.animationCtrl.create('exit')
       .duration(500)
       .direction('alternate')
       .easing('ease-in-out')
-      .addAnimation([exitWest, exitEast]);
+      .addAnimation([exitWest, exitEast, spinnerWest, spinnerEast]);
   }
 
   getEastWestEnterAnimation(selectorWest, selectorEast): Animation {
@@ -32,10 +42,18 @@ export class AnimationService {
       .addElement(document.querySelector(selectorEast))
       .fromTo('transform', 'translateX(200%)', 'translateX(0px)');
 
+    const spinnerCW = this.animationCtrl.create()
+      .addElement(document.querySelector(`${selectorWest} .spinner-prev`))
+      .fromTo('transform', `rotate(-${END_ANGLE}deg)`, 'rotate(0deg)');
+
+    const spinnerCCW = this.animationCtrl.create()
+      .addElement(document.querySelector(`${selectorEast} .spinner-next`))
+      .fromTo('transform', `rotate(${END_ANGLE}deg)`, 'rotate(0deg)');
+
     return this.animationCtrl.create('enter')
       .duration(500)
       .easing('ease-in-out')
-      .addAnimation([enterWest, enterEast]);
+      .addAnimation([enterWest, enterEast, spinnerCCW, spinnerCW]);
   }
 
   getIncorrectAnimation(selector): Animation {
