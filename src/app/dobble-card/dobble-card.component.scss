@@ -1,8 +1,12 @@
 ion-card-content {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
   padding: 0;
+  top: 5%;
+  left: 5%;
+  border-radius: 50%;
+  background-color: white;
 }
 
 .symbols {
@@ -66,6 +70,7 @@ ion-card-content {
     height: 28%;
     margin: -14%;
   }
+
   img {
     width: 70%;
     height: 70%;
@@ -229,4 +234,7 @@ ion-card-content {
 ion-card {
   aspect-ratio: 1;
   border-radius: 50%;
+  background-image: url(/assets/images/pattern-ge5b043080_640.jpg);
+  background-size: cover;
+  box-shadow: 5px 5px 4px 3px rgb(0 0 0 / 20%);
 }
