@@ -1,6 +1,6 @@
 {
   "name": "we-spot",
-  "version": "0.6.18",
+  "version": "0.6.19",
   "author": "Michael D. Callaghan",
   "homepage": "https://walkingriver.com/",
   "scripts": {
@@ -35,7 +35,7 @@
     "ngx-sharebuttons": "^10.0.0",
     "random-seedable": "^1.0.8",
     "random-word-slugs": "^0.1.6",
-    "rxjs": "~6.6.0",
+    "rxjs": "^7.5.5",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },

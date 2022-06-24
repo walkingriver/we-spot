@@ -1,5 +1,5 @@
 ion-card-content {
-  position: relative;
+  position: absolute;
   width: 90%;
   height: 90%;
   padding: 0;
@@ -29,7 +29,7 @@ ion-card-content {
   margin: -16.5%;
   width: 33%;
   height: 33%;
-  overflow: hidden;
+  // overflow: hidden;
   // border: 1pt solid gray;
 
   img {
