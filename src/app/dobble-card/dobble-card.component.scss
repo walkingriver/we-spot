@@ -6,7 +6,6 @@ ion-card-content {
   top: 5%;
   left: 5%;
   border-radius: 50%;
-  background-color: white;
 }
 
 .symbols {
@@ -234,7 +233,26 @@ ion-card-content {
 ion-card {
   aspect-ratio: 1;
   border-radius: 50%;
-  background-image: url(/assets/images/pattern-ge5b043080_640.jpg);
   background-size: cover;
   box-shadow: 5px 5px 4px 3px rgb(0 0 0 / 20%);
+}
+
+@media (prefers-color-scheme: light) {
+  ion-card {
+    background-image: url(/assets/images/pattern-ge5b043080_640.jpg);
+  }
+
+  ion-card-content {
+    background-color: white;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  ion-card {
+    background-color: #ffffff;
+  }
+
+  ion-card-content {
+    background-image: url(/assets/images/pattern-ge5b043080_640.jpg);
+  }
 }
