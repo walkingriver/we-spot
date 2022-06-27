@@ -37,9 +37,9 @@
   <ion-modal [isOpen]="gameOver && showGameOver"
     (didDismiss)="showGameOver=false"
     [keyboardClose]="true"
-    [breakpoints]="[0.5, 0.75, 1]"
+    [breakpoints]="[0, 0.5, 0.75, 1]"
     [initialBreakpoint]="0.75"
-    [swipeToClose]="true">
+    [canDismiss]="true">
     <ng-template>
       <app-game-over (closed)="showGameOver=false"
         [score]="score"
