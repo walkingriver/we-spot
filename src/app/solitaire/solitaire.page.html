@@ -18,18 +18,20 @@
 
 <ion-content class="texture">
   <div class="card-grid">
-    <div id="previous-card" class="card">
+    <div id="previous-card"
+      class="card">
       <div class="spinner-prev">
         <app-dobble-card *ngIf="previousCard"
-        (symbolClick)="onSymbolClick($event)"
-        [card]="previousCard.symbols"></app-dobble-card>
+          (symbolClick)="onSymbolClick($event)"
+          [card]="previousCard.symbols"></app-dobble-card>
       </div>
     </div>
-    <div id="current-card" class="card">
+    <div id="current-card"
+      class="card">
       <div class="spinner-next">
         <app-dobble-card *ngIf="currentCard"
-        (symbolClick)="onSymbolClick($event)"
-        [card]="currentCard.symbols"></app-dobble-card>
+          (symbolClick)="onSymbolClick($event)"
+          [card]="currentCard.symbols"></app-dobble-card>
       </div>
     </div>
   </div>
@@ -41,7 +43,8 @@
     [initialBreakpoint]="0.75"
     [canDismiss]="true">
     <ng-template>
-      <app-game-over (closed)="showGameOver=false"
+      <app-game-over style="height:100%;"
+        (closed)="showGameOver=false"
         [score]="score"
         [game]="deckInfo?.slug"
         [symbols]="deckInfo?.symbolsPerCard"
