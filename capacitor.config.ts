@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'DobbleTrouble',
+  appId: 'com.walkingriver.wespot',
+  appName: 'We Spot!',
   webDir: 'www',
   bundledWebRuntime: false
 };
