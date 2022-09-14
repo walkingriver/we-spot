@@ -33,3 +33,4 @@ npm-debug.log*
 sym.txt
 
 resources/android/**/*
+.dccache
