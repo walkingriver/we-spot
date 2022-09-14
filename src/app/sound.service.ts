@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 
 interface GameSound {
   name: string;
@@ -30,7 +30,7 @@ export class SoundService {
   constructor() {
     this.sounds = this.loadSounds();
 
-    Storage.get({ key: 'soundEnabled' })
+    Preferences.get({ key: 'soundEnabled' })
       .then(result => {
         if (JSON.parse(result.value)) {
           this.enable();
@@ -51,7 +51,7 @@ export class SoundService {
   set(value: boolean) {
     this.isEnabled = value;
     this.enabled.next(value);
-    Storage.set({ key: 'soundEnabled', value: JSON.stringify(value) });
+    Preferences.set({ key: 'soundEnabled', value: JSON.stringify(value) });
   }
 
   loadSounds(): GameSound[] {
