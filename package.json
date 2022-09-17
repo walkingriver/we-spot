@@ -28,6 +28,7 @@
     "@capacitor/app": "4.0.1",
     "@capacitor/core": "4.2.0",
     "@capacitor/haptics": "4.0.1",
+    "@capacitor/ios": "4.2.0",
     "@capacitor/keyboard": "4.0.1",
     "@capacitor/preferences": "4.0.1",
     "@capacitor/status-bar": "4.0.1",
@@ -37,6 +38,7 @@
     "random-seedable": "^1.0.8",
     "random-word-slugs": "^0.1.6",
     "rxjs": "^7.5.5",
+    "sharp": "^0.31.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },
