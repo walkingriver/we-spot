@@ -1,6 +1,6 @@
 {
   "name": "we-spot",
-  "version": "0.9.10",
+  "version": "0.9.17",
   "author": "Michael D. Callaghan",
   "homepage": "https://walkingriver.com/",
   "scripts": {
@@ -31,10 +31,10 @@
     "@capacitor/ios": "4.2.0",
     "@capacitor/keyboard": "4.0.1",
     "@capacitor/preferences": "4.0.1",
+    "@capacitor/share": "^4.0.1",
     "@capacitor/status-bar": "4.0.1",
     "@ionic/angular": "6.2.6",
     "bigint-hash": "^0.2.2",
-    "ngx-sharebuttons": "^10.0.0",
     "random-seedable": "^1.0.8",
     "random-word-slugs": "^0.1.6",
     "rxjs": "^7.5.5",
