@@ -26,9 +26,11 @@ export class GameOverComponent implements OnInit {
   constructor(private clipboard: Clipboard) { }
 
   ngOnInit(): void {
-    this.shareText = `I scored ${this.score} points in We Spot! (${this.game}),
- ${this.deckSize}-card deck with ${this.symbols} symbols per card.
-🏁 Try to beat my score at `;
-    this.clipboard.copy(`${this.shareText}${this.gameUrl}.`);
+    this.gameUrl = `https://we-spot.netlify.app/solitaire/${this.symbols}/${this.game}/${this.deckSize}`;
+    this.shareText = `I scored ${this.score} points in We Spot! (${this.game},
+ ${this.deckSize}-card deck with ${this.symbols} symbols per card).
+🏁 Try to beat my score.`;
+    // this.clipboard.copy(`${this.shareText}${this.gameUrl}.`);
+    this.clipboard.copy(`${this.shareText}.`);
   }
 }
