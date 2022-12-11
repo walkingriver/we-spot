@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { RandomRotationDirective } from '../random-rotation.directive';
 import { CardSymbol } from '../symbols';
 import { ThrottledClickDirective } from '../throttled-click.directive';
 
@@ -10,6 +11,7 @@ import { ThrottledClickDirective } from '../throttled-click.directive';
   imports: [
     CommonModule,
     IonicModule,
+    RandomRotationDirective,
     ThrottledClickDirective
   ],
   templateUrl: './dobble-card.component.html',
