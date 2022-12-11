@@ -1,9 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Share } from '@capacitor/share';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-game-over',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+  ],
   templateUrl: './game-over.component.html',
   styleUrls: ['./game-over.component.scss']
 })
@@ -16,13 +25,6 @@ export class GameOverComponent implements OnInit {
   @Output() closed = new EventEmitter();
   gameUrl = document.location.href;
   shareText = '';
-
-  // shareButtons = [
-  //   { name: 'twitter', image: 'logo-twitter' },
-  //   { name: 'facebook', image: 'logo-facebook' },
-  //   { name: 'pinterest', image: 'logo-pinterest' },
-  //   { name: 'linkedin', image: 'logo-linkedin' },
-  // ];
 
   constructor(private clipboard: Clipboard) { }
 

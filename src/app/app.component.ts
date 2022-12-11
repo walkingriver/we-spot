@@ -1,9 +1,19 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EnvironmentInjector } from '@angular/core';
+import { RouteReuseStrategy, RouterLink } from '@angular/router';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import packageJson from '../../package.json';
 import { SoundService } from './sound.service';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [
+    CommonModule,
+    IonicModule,
+    RouterLink
+  ],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
@@ -19,5 +29,5 @@ export class AppComponent {
   isEnabled = this.sounds.enabled.asObservable();
 
   public appVersion: string = packageJson.version;
-  constructor(public sounds: SoundService) {}
+  constructor(public environmentInjector: EnvironmentInjector, public sounds: SoundService) { }
 }
