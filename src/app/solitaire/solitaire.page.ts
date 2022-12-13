@@ -116,13 +116,13 @@ export class SolitairePage implements OnInit {
 
   async playCorrectAnimation(symbolClicked: CardSymbol) {
     const animation = this.animations
-      .getCorrectAnimation(`[title='${symbolClicked.label}']`);
+      .getCorrectAnimation(`.${symbolClicked}`);
     await animation.play();
   }
 
   async playIncorrectAnimation(symbolClicked: CardSymbol) {
     const animation = this.animations
-      .getIncorrectAnimation(`[title='${symbolClicked.label}']`);
+      .getIncorrectAnimation(`.${symbolClicked}`);
     await animation.play();
   }
 
