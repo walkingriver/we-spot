@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { DeckResolver } from './deck.resolver';
 
-const solitairePage = () => import('./solitaire/solitaire.page').then( m => m.SolitairePage);
-const setupPage = () => import('./setup/setup.page').then( m => m.SetupPage);
-const homePage = () => import('./home/home.page').then( m => m.HomePage);
+const solitairePage = () => import('./solitaire/solitaire.page').then(m => m.SolitairePage);
+const setupPage = () => import('./setup/setup.page').then(m => m.SetupPage);
+const homePage = () => import('./home/home.page').then(m => m.HomePage);
 
 export const routes: Routes = [
   {
@@ -34,8 +34,9 @@ export const routes: Routes = [
     loadComponent: solitairePage,
     resolve: { deckInfo: DeckResolver }
   },
-  // {
-  //   path: 'image-credits',
-  //   loadChildren: () => import('./image-credits/image-credits.module').then( m => m.ImageCreditsPageModule)
-  // },
+  {
+    path: 'image-credits',
+    loadComponent: () => import('./image-credits/image-credits.page')
+      .then(m => m.ImageCreditsPage)
+  },
 ];
