@@ -98,7 +98,7 @@ export class SolitairePage implements OnInit {
 
     const allSymbols = this.currentCard.symbols.concat(this.previousCard.symbols);
 
-    const matchingSymbol = allSymbols.filter(symbol => symbol.fileName === symbolClicked.fileName);
+    const matchingSymbol = allSymbols.filter(symbol => symbol === symbolClicked);
 
     if (matchingSymbol?.length > 1) {
       await this.playCorrectAnimation(symbolClicked);
@@ -116,13 +116,13 @@ export class SolitairePage implements OnInit {
 
   async playCorrectAnimation(symbolClicked: CardSymbol) {
     const animation = this.animations
-      .getCorrectAnimation(`[title='${symbolClicked.fileName}']`);
+      .getCorrectAnimation(`[title='${symbolClicked.label}']`);
     await animation.play();
   }
 
   async playIncorrectAnimation(symbolClicked: CardSymbol) {
     const animation = this.animations
-      .getIncorrectAnimation(`[title='${symbolClicked.fileName}']`);
+      .getIncorrectAnimation(`[title='${symbolClicked.label}']`);
     await animation.play();
   }
 
