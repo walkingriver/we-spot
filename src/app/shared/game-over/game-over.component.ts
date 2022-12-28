@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Share } from '@capacitor/share';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { DeckInfo } from 'src/app/symbols';
 
 @Component({
   selector: 'app-game-over',
@@ -20,21 +21,31 @@ export class GameOverComponent implements OnInit {
   @Input() score = 0;
   @Input() deckSize = 0;
   @Input() game = '';
+  @Input() cards = 0;
   @Input() symbols = 0;
-  @Input() card = [];
+  @Input() deckInfo: DeckInfo;
   @Output() closed = new EventEmitter();
   gameUrl = document.location.href;
   shareText = '';
+  cardsToShare = [];
+  symbolsToShare = '';
 
-  constructor(private clipboard: Clipboard) { }
+  private clipboard = inject(Clipboard);
 
   ngOnInit(): void {
+    this.cardsToShare = this.deckInfo.deck.slice(0, this.cards);
+    this.symbolsToShare = this.cardsToShare.flat().join('');
+    console.log('symbolsToShare', this.symbolsToShare);
+
     this.gameUrl = `https://we-spot.netlify.app/solitaire/${this.symbols}/${this.game}/${this.deckSize}`;
-    this.shareText = `I scored ${this.score} points in We Spot! (${this.game},
- ${this.deckSize}-card deck with ${this.symbols} symbols per card).
-🏁 Try to beat my score.`;
-    // this.clipboard.copy(`${this.shareText}${this.gameUrl}.`);
-    this.clipboard.copy(`${this.shareText}.`);
+    this.shareText = `We Spot!
+    Spot the common symbols on each card.
+    ${this.cardsToShare[0].join('')}
+    ${this.cardsToShare[1].join('')}
+    I scored ${this.score} points!
+    Try to beat my score.`;
+
+    this.clipboard.copy(`${this.shareText}`);
   }
 
   async share() {
