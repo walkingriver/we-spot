@@ -11,7 +11,8 @@ import { Subject, Subscription } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 
 @Directive({
-  selector: '[appThrottledClick]'
+  selector: '[appThrottledClick]',
+  standalone: true,
 })
 export class ThrottledClickDirective implements OnInit, OnDestroy {
   @Input() throttleTime = 500;

@@ -1,8 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { RandomRotationDirective } from '../random-rotation.directive';
 import { CardSymbol } from '../symbols';
+import { ThrottledClickDirective } from '../throttled-click.directive';
 
 @Component({
   selector: 'app-dobble-card',
+  standalone: true,
+  imports: [
+    CommonModule,
+    IonicModule,
+    RandomRotationDirective,
+    ThrottledClickDirective
+  ],
   templateUrl: './dobble-card.component.html',
   styleUrls: ['./dobble-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

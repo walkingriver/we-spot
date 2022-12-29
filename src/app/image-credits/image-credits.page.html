@@ -17,20 +17,10 @@
 
 <ion-content class="ion-padding">
   <h1>Total Images: {{allSymbols?.length}}</h1>
-  <p>All images in this game are used with permission from <a href="https://pixabay.com"
-      target="_blank">Pixabay.com</a>.</p>
-  <p>Clicking on any image will take you to its page so you can download it and view other images by the same
-    artists.</p>
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let symbol of allSymbols">
-        <ion-button class="credit-image"
-          fill="clear"
-          (click)="openImageCredits(symbol)"
-          [title]="symbol.referralUrl">
-          <ion-icon slot="icon-only"
-            src="/assets/symbols/{{symbol.fileName}}"></ion-icon>
-        </ion-button>
+        <div class="credit-image">{{symbol}}</div>
       </ion-col>
     </ion-row>
   </ion-grid>
