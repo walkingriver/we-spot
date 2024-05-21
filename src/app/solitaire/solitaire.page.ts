@@ -1,13 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { AlertController, Animation, IonicModule, ToastController } from '@ionic/angular';
 import { SoundService } from '../sound.service';
 import { CardSymbol, DeckInfo, PlayingCard } from '../symbols';
-import { Animation } from '@ionic/angular';
 import { AnimationService } from '../animation.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { DobbleCardComponent } from '../dobble-card/dobble-card.component';
+import { GameOverComponent } from '../shared/game-over/game-over.component';
 
 @Component({
   selector: 'app-solitaire',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterLink,
+    DobbleCardComponent,
+    GameOverComponent
+  ],
   templateUrl: './solitaire.page.html',
   styleUrls: ['./solitaire.page.scss'],
 })
@@ -86,7 +98,7 @@ export class SolitairePage implements OnInit {
 
     const allSymbols = this.currentCard.symbols.concat(this.previousCard.symbols);
 
-    const matchingSymbol = allSymbols.filter(symbol => symbol.fileName === symbolClicked.fileName);
+    const matchingSymbol = allSymbols.filter(symbol => symbol === symbolClicked);
 
     if (matchingSymbol?.length > 1) {
       await this.playCorrectAnimation(symbolClicked);
@@ -104,13 +116,13 @@ export class SolitairePage implements OnInit {
 
   async playCorrectAnimation(symbolClicked: CardSymbol) {
     const animation = this.animations
-      .getCorrectAnimation(`[title='${symbolClicked.fileName}']`);
+      .getCorrectAnimation(`.${symbolClicked}`);
     await animation.play();
   }
 
   async playIncorrectAnimation(symbolClicked: CardSymbol) {
     const animation = this.animations
-      .getIncorrectAnimation(`[title='${symbolClicked.fileName}']`);
+      .getIncorrectAnimation(`.${symbolClicked}`);
     await animation.play();
   }
 

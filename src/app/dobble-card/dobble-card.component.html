@@ -6,12 +6,11 @@
         *ngFor="let cardSymbol of card">
         <div class="symbol"
           appRandomRotation>
-          <img appThrottledClick
+          <div appThrottledClick
+            [class]="cardSymbol"
             (throttledClick)="onSymbolClick(cardSymbol)"
-            [throttleTime]="2000"
-            src="/assets/symbols/{{cardSymbol?.fileName}}"
-            title="{{cardSymbol?.fileName}}"
-            alt="{{cardSymbol?.fileName}}">
+            [throttleTime]="2000">
+            {{cardSymbol}}</div>
         </div>
       </div>
     </div>

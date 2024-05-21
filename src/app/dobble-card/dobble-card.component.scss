@@ -19,6 +19,11 @@ ion-card-content {
   overflow: hidden;
 }
 
+.symbol-image {
+  // specify the system emoji font
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
 .symbol-wrapper {
   background-color: transparent;
   display: block;
@@ -28,20 +33,11 @@ ion-card-content {
   margin: -16.5%;
   width: 33%;
   height: 33%;
-  // overflow: hidden;
-  // border: 1pt solid gray;
-
-  img {
-    width: 90%;
-    height: 90%;
-    object-fit: contain;
-    // opacity: 0.1;
-  }
-
-
 }
 
 .symbols-4 {
+  font-size: 12vmin;
+
   .symbol-wrapper:nth-of-type(1) {
     transform:
       rotate(45deg) translate(80%) rotate(-45deg);
@@ -64,6 +60,8 @@ ion-card-content {
 }
 
 .symbols-6 {
+  font-size: 10vmin;
+
   .symbol-wrapper {
     width: 29%;
     height: 28%;
@@ -107,14 +105,12 @@ ion-card-content {
 }
 
 .symbols-8 {
+  font-size: 10vmin;
+
   .symbol-wrapper {
     width: 26%;
     height: 26%;
     margin: -13%;
-  }
-
-  img {
-    // width: 70%;
   }
 
   .symbol-wrapper:nth-of-type(1) {
@@ -159,14 +155,12 @@ ion-card-content {
 }
 
 .symbols-12 {
+  font-size: 8vmin;
+
   .symbol-wrapper {
     width: 20%;
     height: 20%;
     margin: -10%;
-  }
-
-  img {
-    // width: 70%;
   }
 
   .symbol-wrapper:nth-of-type(1) {

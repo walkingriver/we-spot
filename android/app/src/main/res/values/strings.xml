@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">We Spot!</string>
+    <string name="title_activity_main">We Spot!</string>
+    <string name="package_name">com.walkingriver.wespot</string>
+    <string name="custom_url_scheme">com.walkingriver.wespot</string>
+</resources>

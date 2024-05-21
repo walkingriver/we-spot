@@ -1,28 +1,28 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CardSymbol, SYMBOLS } from '../symbols';
+import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { SYMBOLS } from '../symbols';
 
-const pixabayUrl = 'https://pixabay.com/vectors/';
 
 @Component({
   selector: 'app-image-credits',
+  standalone: true,
+  imports: [
+    CommonModule,
+    IonicModule,
+    RouterLink
+  ],
   templateUrl: './image-credits.page.html',
   styleUrls: ['./image-credits.page.scss'],
 })
 export class ImageCreditsPage {
-  allSymbols: CardSymbol[] = [];
+  allSymbols: string[] = [];
 
   constructor() {
     this.allSymbols = SYMBOLS
-      .sort((a, b) => a.fileName.localeCompare(b.fileName))
-      .map(symbol => ({
-        fileName: symbol.fileName,
-        referralUrl: `${pixabayUrl}${(symbol.fileName).replace('.svg', '')}`,
-      }));
+      .sort((a, b) => a.localeCompare(b));
 
     console.table(this.allSymbols);
-  }
-
-  openImageCredits(symbol) {
-    window.open(symbol.referralUrl, '_blank');
   }
 }

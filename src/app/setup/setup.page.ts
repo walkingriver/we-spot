@@ -1,8 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { generateSlug, RandomWordOptions } from 'random-word-slugs';
 
 @Component({
   selector: 'app-setup',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterLink,
+  ],
   templateUrl: './setup.page.html',
   styleUrls: ['./setup.page.scss'],
 })
@@ -29,12 +40,12 @@ export class SetupPage implements OnInit {
     this.slug = this.generateSlug();
   }
 
-generateSlug() {
-  const options: RandomWordOptions<3> = {
-    format: 'kebab',
-    partsOfSpeech: ['noun', 'noun', 'noun'],
-  };
-  const slug = generateSlug(3, options);
-  return slug;
-}
+  generateSlug() {
+    const options: RandomWordOptions<3> = {
+      format: 'kebab',
+      partsOfSpeech: ['noun', 'noun', 'noun'],
+    };
+    const slug = generateSlug(3, options);
+    return slug;
+  }
 }

@@ -1,7 +1,8 @@
 import { Directive, ElementRef, Input, Renderer2, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[appRandomRotation]'
+  selector: '[appRandomRotation]',
+  standalone: true,
 })
 export class RandomRotationDirective implements OnInit {
   appRandomRotation = Math.random() * 360;

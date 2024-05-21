@@ -31,3 +31,6 @@ npm-debug.log*
 /plugins
 /www
 sym.txt
+
+resources/android/**/*
+.dccache
