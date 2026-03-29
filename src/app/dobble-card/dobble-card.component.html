@@ -1,20 +1,20 @@
 <ion-card>
-
   <ion-card-content>
-    <div class="symbols symbols-{{card?.length}}">
-      <div class="symbol-wrapper"
-        *ngFor="let cardSymbol of card">
-        <div class="symbol"
-          appRandomRotation>
-          <img appThrottledClick
-            (throttledClick)="onSymbolClick(cardSymbol)"
-            [throttleTime]="2000"
-            src="/assets/symbols/{{cardSymbol?.fileName}}"
-            title="{{cardSymbol?.fileName}}"
-            alt="{{cardSymbol?.fileName}}">
+    <div class="symbols symbols-{{ card().length }}">
+      @for (cardSymbol of card(); track cardSymbol.fileName) {
+        <div class="symbol-wrapper">
+          <div class="symbol" appRandomRotation>
+            <img
+              appThrottledClick
+              (throttledClick)="onSymbolClick(cardSymbol)"
+              [throttleTime]="2000"
+              src="/assets/symbols/{{ cardSymbol.fileName }}"
+              [title]="cardSymbol.fileName"
+              [alt]="cardSymbol.fileName"
+            />
+          </div>
         </div>
-      </div>
+      }
     </div>
   </ion-card-content>
-
 </ion-card>

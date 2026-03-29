@@ -1,40 +1,40 @@
 import {
   Directive,
-  EventEmitter,
   HostListener,
-  Input,
   OnDestroy,
   OnInit,
-  Output
+  input,
+  output,
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { throttleTime } from 'rxjs/operators';
+import { throttleTime as throttleTimeOperator } from 'rxjs/operators';
 
 @Directive({
-  selector: '[appThrottledClick]'
+  selector: '[appThrottledClick]',
+  standalone: true,
 })
 export class ThrottledClickDirective implements OnInit, OnDestroy {
-  @Input() throttleTime = 500;
-  @Output() throttledClick = new EventEmitter();
-  private clicks = new Subject();
-  private subscription: Subscription;
+  /** Milliseconds between emitted clicks. */
+  readonly throttleTime = input(500);
+  readonly throttledClick = output<MouseEvent>();
 
-  constructor() { }
+  private clicks = new Subject<MouseEvent>();
+  private subscription?: Subscription;
 
   @HostListener('click', ['$event'])
-  clickEvent(event) {
+  clickEvent(event: MouseEvent): void {
     event.preventDefault();
     event.stopPropagation();
     this.clicks.next(event);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscription = this.clicks
-      .pipe(throttleTime(this.throttleTime))
-      .subscribe(e => this.throttledClick.emit(e));
+      .pipe(throttleTimeOperator(this.throttleTime()))
+      .subscribe((e) => this.throttledClick.emit(e));
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 }

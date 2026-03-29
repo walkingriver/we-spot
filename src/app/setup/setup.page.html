@@ -5,11 +5,8 @@
     </ion-buttons>
     <ion-title>New Game</ion-title>
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/home']"
-        routerDirection="back">
-        <ion-icon slot="icon-only"
-          color="dark"
-          name="home"></ion-icon>
+      <ion-button routerLink="/home" routerDirection="back">
+        <ion-icon slot="icon-only" color="dark" name="home"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -18,40 +15,47 @@
 <ion-content class="texture">
   <ion-card>
     <ion-card-header color="secondary">
-      <ion-card-subtitle>
-        Configure a new game
-      </ion-card-subtitle>
+      <ion-card-subtitle> Configure a new game </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-list lines="none">
         <ion-item>
           <ion-label position="stacked">Game Name:</ion-label>
-          <ion-input [(ngModel)]="slug"></ion-input>
+          <ion-input [value]="slug()" (ionInput)="onSlugInput($event)"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Difficulty: </ion-label>
-          <ion-select [(ngModel)]="selectedNumberOfSymbols"
-            interface="popover">
-            <ion-select-option *ngFor="let validSymbol of validSymbols"
-              [value]="validSymbol.value">{{validSymbol.label}}</ion-select-option>
+          <ion-select
+            [value]="selectedNumberOfSymbols()"
+            (ionChange)="onSymbolsChange($event)"
+            interface="popover"
+          >
+            @for (validSymbol of validSymbols; track validSymbol.value) {
+              <ion-select-option [value]="validSymbol.value">{{ validSymbol.label }}</ion-select-option>
+            }
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Deck Size: </ion-label>
-          <ion-select [(ngModel)]="selectedDeckSize"
-            interface="popover">
-            <ion-select-option *ngFor="let size of deckSizes"
-              [value]="size.value">{{size.label}}</ion-select-option>
+          <ion-select
+            [value]="selectedDeckSize()"
+            (ionChange)="onDeckSizeChange($event)"
+            interface="popover"
+          >
+            @for (size of deckSizes; track size.value) {
+              <ion-select-option [value]="size.value">{{ size.label }}</ion-select-option>
+            }
           </ion-select>
         </ion-item>
       </ion-list>
-      <ion-button color="primary"
-        [routerLink]="['/solitaire', selectedNumberOfSymbols, slug, selectedDeckSize]"
+      <ion-button
+        color="primary"
+        [routerLink]="['/solitaire', selectedNumberOfSymbols(), slug(), selectedDeckSize()]"
         routerDirection="forward"
-        expand="block">
+        expand="block"
+      >
         Start
       </ion-button>
     </ion-card-content>
   </ion-card>
-
 </ion-content>

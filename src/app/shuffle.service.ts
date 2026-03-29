@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MersenneTwister } from 'random-seedable';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShuffleService {
   random: MersenneTwister = new MersenneTwister();
@@ -13,12 +13,13 @@ export class ShuffleService {
   }
 
   hashCode(str: string): number {
-    return Array.from(str)
-      // eslint-disable-next-line no-bitwise
-      .reduce((s, c) => Math.imul(31, s) + c.charCodeAt(0) | 0, 0);
+    return Array.from(str).reduce(
+      (s, c) => (Math.imul(31, s) + c.charCodeAt(0)) | 0,
+      0,
+    );
   }
 
-  shuffle(array): any[] {
-    return this.random.shuffle(array);
+  shuffle<T>(array: T[]): T[] {
+    return this.random.shuffle(array) as T[];
   }
 }

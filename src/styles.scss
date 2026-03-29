@@ -1,0 +1,15 @@
+@media (prefers-color-scheme: dark) {
+  ion-content.texture {
+    background-repeat: repeat;
+    --background: url('/assets/images/dark-wood.jpg');
+    background-size: contain;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  ion-content.texture {
+    background-repeat: repeat;
+    --background: url('/assets/images/light-wood.jpg');
+    background-size: contain;
+  }
+}

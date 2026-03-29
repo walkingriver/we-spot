@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Storage } from '@capacitor/storage';
+import { Injectable, signal } from '@angular/core';
+import { Preferences } from '@capacitor/preferences';
 
 interface GameSound {
   name: string;
@@ -8,61 +7,64 @@ interface GameSound {
 }
 
 export type GameSoundName =
-  'jump' |
-  'coin' |
-  'drum' |
-  'game-over' |
-  'kick' |
-  'start' |
-  'start2' |
-  'stop' |
-  'buzzer';
+  | 'jump'
+  | 'coin'
+  | 'drum'
+  | 'game-over'
+  | 'kick'
+  | 'start'
+  | 'start2'
+  | 'stop'
+  | 'buzzer';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SoundService {
   sounds: GameSound[] = [];
-  currentSound: HTMLAudioElement;
-  enabled: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  currentSound: HTMLAudioElement | undefined;
+  /** Whether sound effects are enabled (persisted). */
+  readonly enabled = signal(true);
   private isEnabled = true;
 
   constructor() {
     this.sounds = this.loadSounds();
 
-    Storage.get({ key: 'soundEnabled' })
-      .then(result => {
-        if (JSON.parse(result.value)) {
-          this.enable();
-        } else {
-          this.disable();
-        }
-      });
+    void Preferences.get({ key: 'soundEnabled' }).then((result) => {
+      if (result.value != null && JSON.parse(result.value)) {
+        this.enable();
+      } else if (result.value != null) {
+        this.disable();
+      }
+    });
   }
 
-  enable() {
+  enable(): void {
     this.set(true);
   }
 
-  disable() {
+  disable(): void {
     this.set(false);
   }
 
-  set(value: boolean) {
+  set(value: boolean): void {
     this.isEnabled = value;
-    this.enabled.next(value);
-    Storage.set({ key: 'soundEnabled', value: JSON.stringify(value) });
+    this.enabled.set(value);
+    void Preferences.set({
+      key: 'soundEnabled',
+      value: JSON.stringify(value),
+    });
   }
 
   loadSounds(): GameSound[] {
     return allSounds.map((sound) => ({
       name: sound.name,
-      audio: new Audio(`./assets/sounds/${sound.src}`)
+      audio: new Audio(`./assets/sounds/${sound.src}`),
     }));
   }
 
-  stop() {
-    if (this.currentSound?.ended && !this.currentSound.ended) {
+  stop(): void {
+    if (this.currentSound && !this.currentSound.ended) {
       this.currentSound.pause();
       this.currentSound.currentTime = 0;
     }
@@ -70,29 +72,26 @@ export class SoundService {
 
   play(name: string): Promise<void> {
     if (this.isEnabled) {
-      stop();
-      const sound = this.sounds.find(s => s.name === name);
+      this.stop();
+      const sound = this.sounds.find((s) => s.name === name);
       if (sound) {
         this.currentSound = sound.audio;
         return sound.audio.play();
       }
     }
-
     return Promise.resolve();
   }
 
   playRandom(soundNames: string[]): Promise<void> {
     const soundName = soundNames[Math.floor(Math.random() * soundNames.length)];
     return this.play(soundName);
-    // const sound = this.sounds.find(s => s.name === soundName);
-    // return sound?.audio?.play();
   }
 
-  playFailureSound() {
+  playFailureSound(): Promise<void> {
     return this.playRandom(['kick', 'drum', 'jump', 'stop']);
   }
 
-  playSuccessSound() {
+  playSuccessSound(): Promise<void> {
     return this.play('coin');
   }
 }
@@ -106,5 +105,5 @@ const allSounds = [
   { name: 'start2', src: 'start-13691.mp3' },
   { name: 'start', src: 'start-computeraif-14572.mp3' },
   { name: 'stop', src: 'stop-13692.mp3' },
-  { name: 'buzzer', src: 'wrong-buzzer-6268.mp3' }
+  { name: 'buzzer', src: 'wrong-buzzer-6268.mp3' },
 ];

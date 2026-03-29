@@ -3,39 +3,32 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      We Spot!
-    </ion-title>
+    <ion-title> We Spot! </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding-horizontal texture">
   <h1>How to Play</h1>
   <p>
-    We Spot! is a game where you try to match symbols between cards.
-    The symbols are randomly placed and rotated on the cards, and then
-    the deck is shuffled.
+    We Spot! is a game where you try to match symbols between cards. The symbols are randomly placed and rotated on
+    the cards, and then the deck is shuffled.
   </p>
-  <app-dobble-card title="Sample Card 1"
-    *ngIf="previousCard"
-    [card]="previousCard"></app-dobble-card>
+  @if (previousCard(); as prev) {
+    <app-dobble-card title="Sample Card 1" [card]="prev"></app-dobble-card>
+  }
   <p>
-    The symbols and cards are designed so that any two cards will
-    contain one, and only one, common symbol. The trick is to
-    find that match as quickly as possible. It's not as easy as it sounds.
+    The symbols and cards are designed so that any two cards will contain one, and only one, common symbol. The trick
+    is to find that match as quickly as possible. It's not as easy as it sounds.
   </p>
-  <app-dobble-card title="Sample Card 2"
-    *ngIf="currentCard"
-    [card]="currentCard"></app-dobble-card>
+  @if (currentCard(); as cur) {
+    <app-dobble-card title="Sample Card 2" [card]="cur"></app-dobble-card>
+  }
   <p>
-    The number of cards in each deck is mathematically related to the number
-    of symbols on each card. The more symbols, the more cards, and the harder
-    it is to find the match.
+    The number of cards in each deck is mathematically related to the number of symbols on each card. The more
+    symbols, the more cards, and the harder it is to find the match.
   </p>
 
   <ion-toolbar color="transparent">
-    <ion-button expand="block"
-      [routerLink]="['/setup']"
-      routerDirection="forward">New Game</ion-button>
+    <ion-button expand="block" routerLink="/setup" routerDirection="forward">New Game</ion-button>
   </ion-toolbar>
 </ion-content>

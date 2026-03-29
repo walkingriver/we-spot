@@ -6,11 +6,8 @@
     </ion-buttons>
     <ion-title>Solitaire</ion-title>
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/home']"
-        routerDirection="back">
-        <ion-icon slot="icon-only"
-          color="dark"
-          name="home"></ion-icon>
+      <ion-button routerLink="/home" routerDirection="back">
+        <ion-icon slot="icon-only" color="dark" name="home"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -18,62 +15,69 @@
 
 <ion-content class="texture">
   <div class="card-grid">
-    <div id="previous-card"
-      class="card">
+    <div id="previous-card" class="card">
       <div class="spinner-prev">
-        <app-dobble-card *ngIf="previousCard"
-          (symbolClick)="onSymbolClick($event)"
-          [card]="previousCard.symbols"></app-dobble-card>
+        @if (previousCard(); as p) {
+          <app-dobble-card
+            (symbolClick)="onSymbolClick($event)"
+            [card]="p.symbols"
+          ></app-dobble-card>
+        }
       </div>
     </div>
-    <div id="current-card"
-      class="card">
+    <div id="current-card" class="card">
       <div class="spinner-next">
-        <app-dobble-card *ngIf="currentCard"
-          (symbolClick)="onSymbolClick($event)"
-          [card]="currentCard.symbols"></app-dobble-card>
+        @if (currentCard(); as c) {
+          <app-dobble-card
+            (symbolClick)="onSymbolClick($event)"
+            [card]="c.symbols"
+          ></app-dobble-card>
+        }
       </div>
     </div>
   </div>
 
-  <ion-modal [isOpen]="gameOver && showGameOver"
-    (didDismiss)="showGameOver=false"
+  <ion-modal
+    [isOpen]="gameOver() && showGameOver()"
+    (didDismiss)="onModalDismissed()"
     [keyboardClose]="true"
     [breakpoints]="[0, 0.5, 0.75, 1]"
     [initialBreakpoint]="0.75"
-    [canDismiss]="true">
-    <ng-template>
-      <app-game-over style="height:100%;"
-        (closed)="showGameOver=false"
-        [score]="score"
-        [game]="deckInfo?.slug"
-        [symbols]="deckInfo?.symbolsPerCard"
-        [deckSize]="deckSize"
-        [card]="previousCard.symbols"></app-game-over>
-    </ng-template>
+    [canDismiss]="true"
+  >
+    <app-game-over
+      style="height: 100%"
+      (closed)="onGameOverClosed()"
+      [score]="score()"
+      [game]="deckInfo()?.slug ?? ''"
+      [symbols]="deckInfo()?.symbolsPerCard ?? 0"
+      [deckSize]="deckSize()"
+      [card]="previousCard()?.symbols ?? []"
+    ></app-game-over>
   </ion-modal>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-title>
-      <ion-label *ngIf="score">Score: {{score}}</ion-label>
+      @if (score()) {
+        <ion-label>Score: {{ score() }}</ion-label>
+      }
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button *ngIf="gameOver"
-        (click)="showGameOver=true">
-        <ion-icon slot="icon-only"
-          name="share"></ion-icon>
-      </ion-button>
+      @if (gameOver()) {
+        <ion-button (click)="openShareModal()">
+          <ion-icon slot="icon-only" name="share"></ion-icon>
+        </ion-button>
+      }
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
 
-<ion-fab *ngIf="currentCard && index"
-  vertical="bottom"
-  horizontal="end"
-  slot="fixed">
-  <ion-fab-button color="primary">
-    {{index}}
-  </ion-fab-button>
-</ion-fab>
+@if (currentCard() && index()) {
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary">
+      {{ index() }}
+    </ion-fab-button>
+  </ion-fab>
+}

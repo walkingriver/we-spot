@@ -1,33 +1,28 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { IonCard, IonCardContent } from '@ionic/angular/standalone';
 import { CardSymbol } from '../symbols';
+import { RandomRotationDirective } from '../random-rotation.directive';
+import { ThrottledClickDirective } from '../throttled-click.directive';
 
 @Component({
   selector: 'app-dobble-card',
+  standalone: true,
   templateUrl: './dobble-card.component.html',
-  styleUrls: ['./dobble-card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './dobble-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    IonCard,
+    IonCardContent,
+    RandomRotationDirective,
+    ThrottledClickDirective,
+  ],
 })
 export class DobbleCardComponent {
-  @Input() card: CardSymbol[] = [];
-  @Input() title = 'Card';
-  @Output() symbolClick = new EventEmitter();
+  readonly card = input<CardSymbol[]>([]);
+  readonly title = input('Card');
+  readonly symbolClick = output<CardSymbol>();
 
-  cardGrid = [];
-
-  onSymbolClick(symbol: CardSymbol) {
+  onSymbolClick(symbol: CardSymbol): void {
     this.symbolClick.emit(symbol);
   }
-
-  splitArray(arr, rows) {
-    const itemsPerRow = Math.ceil(arr.length / rows);
-    return arr.reduce((acc, val, ind) => {
-      const currentRow = Math.floor(ind / itemsPerRow);
-      if (!acc[currentRow]) {
-        acc[currentRow] = [val];
-      } else {
-        acc[currentRow].push(val);
-      };
-      return acc;
-    }, []);
-  };
 }

@@ -1,28 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import {
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonButton,
+  IonIcon,
+  IonGrid,
+  IonRow,
+  IonCol,
+} from '@ionic/angular/standalone';
 import { CardSymbol, SYMBOLS } from '../symbols';
 
 const pixabayUrl = 'https://pixabay.com/vectors/';
 
 @Component({
   selector: 'app-image-credits',
+  standalone: true,
   templateUrl: './image-credits.page.html',
-  styleUrls: ['./image-credits.page.scss'],
+  styleUrl: './image-credits.page.scss',
+  imports: [
+    RouterLink,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    IonContent,
+    IonButton,
+    IonIcon,
+    IonGrid,
+    IonRow,
+    IonCol,
+  ],
 })
 export class ImageCreditsPage {
-  allSymbols: CardSymbol[] = [];
-
-  constructor() {
-    this.allSymbols = SYMBOLS
-      .sort((a, b) => a.fileName.localeCompare(b.fileName))
-      .map(symbol => ({
+  readonly allSymbols = signal<CardSymbol[]>(
+    SYMBOLS.sort((a, b) => a.fileName.localeCompare(b.fileName)).map(
+      (symbol) => ({
         fileName: symbol.fileName,
-        referralUrl: `${pixabayUrl}${(symbol.fileName).replace('.svg', '')}`,
-      }));
+        referralUrl: `${pixabayUrl}${symbol.fileName.replace('.svg', '')}`,
+      }),
+    ),
+  );
 
-    console.table(this.allSymbols);
-  }
-
-  openImageCredits(symbol) {
+  openImageCredits(symbol: CardSymbol): void {
     window.open(symbol.referralUrl, '_blank');
   }
 }

@@ -1,40 +1,98 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import {
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonButton,
+  IonIcon,
+  IonCard,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonSelect,
+  IonSelectOption,
+} from '@ionic/angular/standalone';
 import { generateSlug, RandomWordOptions } from 'random-word-slugs';
 
 @Component({
   selector: 'app-setup',
+  standalone: true,
   templateUrl: './setup.page.html',
-  styleUrls: ['./setup.page.scss'],
+  styleUrl: './setup.page.scss',
+  imports: [
+    RouterLink,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle,
+    IonContent,
+    IonButton,
+    IonIcon,
+    IonCard,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardContent,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonInput,
+    IonSelect,
+    IonSelectOption,
+  ],
 })
 export class SetupPage implements OnInit {
-  selectedNumberOfSymbols = 6;
-  validSymbols = [
+  readonly slug = signal('');
+  readonly selectedNumberOfSymbols = signal(6);
+  readonly selectedDeckSize = signal(1);
+
+  readonly validSymbols = [
     { label: 'Easy - 13 cards, 4 symbols', value: 4 },
     { label: 'Medium - 31 cards, 6 symbols', value: 6 },
     { label: 'Hard - 57 cards, 8 symbols', value: 8 },
     { label: 'Extreme - 133 cards, 12 symbols', value: 12 },
   ];
-  selectedDeckSize = 1;
-  deckSizes = [
+  readonly deckSizes = [
     { label: 'Full Deck', value: 1 },
     { label: '3/4 Deck', value: 0.75 },
-    { label: '1/2 Deck', value: 0.50 },
+    { label: '1/2 Deck', value: 0.5 },
     { label: '1/3 Deck', value: 0.333 },
     { label: '1/4 Deck', value: 0.25 },
-    { label: '1/5 Deck', value: 0.20 },
+    { label: '1/5 Deck', value: 0.2 },
   ];
-  slug = '';
 
   ngOnInit(): void {
-    this.slug = this.generateSlug();
+    this.slug.set(this.generateSlug());
   }
 
-generateSlug() {
-  const options: RandomWordOptions<3> = {
-    format: 'kebab',
-    partsOfSpeech: ['noun', 'noun', 'noun'],
-  };
-  const slug = generateSlug(3, options);
-  return slug;
-}
+  onSlugInput(ev: Event): void {
+    const v = (ev as CustomEvent<{ value?: string | null }>).detail?.value;
+    this.slug.set(v != null ? String(v) : '');
+  }
+
+  onSymbolsChange(ev: Event): void {
+    const v = (ev as CustomEvent<{ value: number }>).detail.value;
+    this.selectedNumberOfSymbols.set(Number(v));
+  }
+
+  onDeckSizeChange(ev: Event): void {
+    const v = (ev as CustomEvent<{ value: number }>).detail.value;
+    this.selectedDeckSize.set(Number(v));
+  }
+
+  generateSlug(): string {
+    const options: RandomWordOptions<3> = {
+      format: 'kebab',
+      partsOfSpeech: ['noun', 'noun', 'noun'],
+    };
+    return generateSlug(3, options);
+  }
 }

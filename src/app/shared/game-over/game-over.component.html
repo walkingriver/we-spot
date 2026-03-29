@@ -1,38 +1,30 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Final Score: {{score}}</ion-title>
+    <ion-title>Final Score: {{ score() }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="closed.emit()">
-        <ion-icon slot="icon-only"
-          name="close"></ion-icon>
+        <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-
   <div class="ion-padding">
     <h1>Share Your Success with the World</h1>
     <h2>
-      {{shareText}}
-      {{gameUrl}}.
+      {{ shareText() }}
+      {{ pageUrl() }}.
     </h2>
     <p>(This text has been copied to your clipboard for easy sharing.)</p>
   </div>
 
   <ion-toolbar color="transparent">
     <ion-buttons slot="start">
-      <ng-container *ngFor="let button of shareButtons">
-        <ion-button [shareButton]="button.name"
-          [autoSetMeta]="false"
-          [description]="shareText"
-          [url]="gameUrl"
-          title="I won at We Spot!">
-          <ion-icon slot="icon-only"
-            [name]="button.image"></ion-icon>
+      @for (button of shareButtons(); track button.name) {
+        <ion-button [href]="button.href" target="_blank" rel="noopener noreferrer">
+          <ion-icon slot="icon-only" [name]="button.image"></ion-icon>
         </ion-button>
-      </ng-container>
+      }
     </ion-buttons>
   </ion-toolbar>
-
 </ion-content>
